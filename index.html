@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Welcome</title>
+</head>
+<body>
+  <meta charset="UTF-8">
+    <h1>Welcome to Andy's site</h1>
+    <script>
+        function enterpw() {
+            var password = prompt("Please enter the password:");
+            switch (password) {
+                case "Andy":
+                    continuego();
+                    break;
+                case null:
+                    pw_not_entered();
+                    break;
+                default:
+                    warn("Wrong Password. Please try again");
+                    enterpw();
+                    break;
+            }
+        }
+
+        function warn(message) {
+            alert(message);
+        }
+
+        function continuego() {
+            var now = new Date();
+            var y2k = new Date("April 26, 2028 00:00:00");
+            var seconds = (y2k - now) / 1000;
+            var hours = seconds / 3600;
+            document.write("Hours until My 18th birthday: " + hours + " hours");
+            warn("ROBOT ATTACK IS NOT ALLOWED");
+            document.write("<hr>"); // Adds a horizontal line
+            document.write("<p>Useful things share.Sharing is caring.</p>");
+            document.write('<p style="font-size: 25px;"><b>学习 Study Use</b>(Word,Excel,Onedrive,Powerpoint included.)</p>');
+            document.write("<p>微软Office教育版 Microsoft Office Education <b><i>Free</i></b>:</p>");
+            document.write('<a href="https://www.microsoft.com/en-us/education/products/office">Download</a>');
+            document.write("<p>Microsoft Visual Studio Code:</p>");
+            document.write('<a href="https://code.visualstudio.com/download">Download</a>');
+            document.write('<p style="font-size: 25px;"><b>Computer Safety电脑安全</b></p>');
+            document.write("<p>卡巴斯基免费版 Kaspersky Free antivirus:</p>");
+            document.write('<a href="https://www.kaspersky.com/downloads/free-antivirus">Download</a>');
+            document.write("<p>小红伞免费版 Avira Free antivirus:</p>");
+            document.write('<a href="https://www.avira.com/en/free-antivirus-windows">Download</a>');
+            document.write('<p style="font-size: 25px;"><b>干货分享</b></p>');
+        
+        }
+
+        function pw_not_entered() {
+            document.write("You failed to visit this website.");
+            document.write("<p>Code:401 (No password entered)</p>");
+        }
+
+        enterpw();
+    </script>
+    <p align="center">©2023 ANDYCHAN</p>
+</body>
+</html>
