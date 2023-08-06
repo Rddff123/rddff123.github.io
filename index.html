@@ -2,61 +2,78 @@
 <html>
 <head>
     <title>Welcome</title>
+    <style>
+        a:link {
+            color: #FF0000;
+            text-decoration: none;
+        }
+        
+        a:visited {
+            color: #eb6e6a;
+            text-decoration: none;
+        }
+        
+        a:hover {
+            text-decoration: underline;
+            color: #f2eca2;
+        }
+        
+        a:active {
+            text-decoration: underline;
+            color: #f2eca2;
+        }
+    </style>
 </head>
-<style>
-a:link {color:#FF0000;
-text-decoration:none;}      
-a:visited {color:#eb6e6a;
-text-decoration:none;}
-a:hover {text-decoration:underline;
-color:#f2eca2;}   
-a:active {text-decoration:underline;
-color:#f2eca2;}
-</style>
 <body>
-  <meta charset="UTF-8">
-    <h1>Welcome to Andy's site</h1>
-    <p align="right"><a href="/home/about">关于About| </a><a href="/home/sharing">分享sharing| </a><a href="/home/update">更新Update| </a><a href="/home/disclaimer">免责声明DISCLAIMER| </a><a href="/home/contactme">联络我Contact me </a></p>
-    <script>
-        function enterpw() {
-            var password = prompt("Please enter the password:");
-            switch (password) {
-                case "Andy":
-                    continuego();
-                    break;
-                case null:
-                    pw_not_entered();
-                    break;
-                default:
-                    warn("Wrong Password. Please try again");
-                    enterpw();
-                    break;
-            }
+<meta charset="UTF-8">
+<h1>Welcome to Andy's site</h1>
+<p align="right">
+    <a href="/home/about">关于About| </a>
+    <a href="/home/sharing">分享sharing| </a>
+    <a href="/home/update">更新Update| </a>
+    <a href="/home/disclaimer">免责声明DISCLAIMER| </a>
+    <a href="/home/contactme">联络我Contact me </a>
+</p>
+<script>
+    function enterpw() {
+        var password = prompt("Please enter the password:");
+        switch (password) {
+            case "Andy":
+                continuego();
+                break;
+            case null:
+                pw_not_entered();
+                break;
+            default:
+                warn("Wrong Password. Please try again");
+                enterpw();
+                break;
         }
+    }
 
-        function warn(message) {
-            alert(message);
-        }
+    function warn(message) {
+        alert(message);
+    }
 
-        function continuego() {
-            var now = new Date();
-            var y2k = new Date("April 26, 2028 00:00:00");
-            var seconds = (y2k - now) / 1000;
-            var years = seconds / 3600/24/365;
-            document.write("Years until My 18th birthday: " + years + " years");
-            warn("ROBOT ATTACK IS NOT ALLOWED");
-            document.write("<hr>"); // Adds a horizontal line
-            document.write("<p> 个人简介：电脑爱好者（想当年电脑成绩全部A+）Personal Introduction:Computer lover(MY COMPUTER MARK BEFORE SECONDARY SCHOOL IS ALL A+);
-            document.write("HELLO豆豆XD");
-        }
+    function continuego() {
+        var now = new Date();
+        var y2k = new Date("April 26, 2028 00:00:00");
+        var seconds = (y2k - now) / 1000;
+        var years = seconds / 3600 / 24 / 365;
+        document.write("Years until My 18th birthday: " + years + " years");
+        warn("ROBOT ATTACK IS NOT ALLOWED");
+        document.write("<hr>"); // Adds a horizontal line
+        document.write("<p>个人简介：电脑爱好者（想当年电脑成绩全部A+）Personal Introduction: Computer lover(MY COMPUTER MARK BEFORE SECONDARY SCHOOL IS ALL A+)");
+        document.write("HELLO豆豆XD");
+    }
 
-        function pw_not_entered() {
-            document.write("You failed to visit this website.");
-            document.write("<p>Code:401 (No password entered)</p>");
-        }
+    function pw_not_entered() {
+        document.write("You failed to visit this website.");
+        document.write("<p>Code:401 (No password entered)</p>");
+    }
 
-        enterpw();
-    </script>
-    <p align="center">2023 BY---ANDYCHAN,A STUDENT STUDY AT HKTATHMSS~~~</p>
+    enterpw();
+</script>
+<p align="center">2023 BY---ANDYCHAN,A STUDENT STUDY AT HKTATHMSS~~~</p>
 </body>
 </html>
