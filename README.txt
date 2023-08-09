@@ -1,2 +1,1 @@
-HELLO ! 
-I AM A NOOB AT COING. SO DONT "HURT" ME--- CHANGING MY CODE PLS~~~~~
+Why u are here.Go Go Go~~~!!!!
