@@ -22,9 +22,10 @@
             text-decoration: underline;
             color: #f2eca2;
         }
+        
         body {
             background-image: url('background1.jpg');
-}
+        }
     </style>
 </head>
 <body>
@@ -37,45 +38,25 @@
     <a href="/home/disclaimer">免责声明DISCLAIMER| </a>
     <a href="/home/contactme">联络我Contact me </a>
 </p>
+<p>
+    Years until My 18th birthday: <span id="years"></span> years
+</p>
+<hr>
+<p>个人简介：电脑爱好者（想当年电脑成绩全部A+）<br>Personal Introduction: Computer lover(MY COMPUTER MARK BEFORE SECONDARY SCHOOL IS ALL A+)</p>
+
 <script>
-    function enterpw() {
-        var password = prompt("Please enter the password:");
-        switch (password) {
-            case "Andy":
-                continuego();
-                break;
-            case null:
-                pw_not_entered();
-                break;
-            default:
-                warn("Wrong Password. Please try again");
-                enterpw();
-                break;
-        }
-    }
+    var now = new Date();
+    var y2k = new Date("April 26, 2028 00:00:00");
+    var seconds = (y2k - now) / 1000;
+    var years = seconds / 3600 / 24 / 365;
+    document.getElementById("years").textContent = years.toFixed(2);
+
+    warn("ROBOT ATTACK IS NOT ALLOWED");
 
     function warn(message) {
-        alert(message);
+        console.log(message);
     }
-
-    function continuego() {
-        var now = new Date();
-        var y2k = new Date("April 26, 2028 00:00:00");
-        var seconds = (y2k - now) / 1000;
-        var years = seconds / 3600 / 24 / 365;
-        document.write("Years until My 18th birthday: " + years + " years");
-        warn("ROBOT ATTACK IS NOT ALLOWED");
-        document.write("<hr>"); // Adds a horizontal line
-        document.write("<p>个人简介：电脑爱好者（想当年电脑成绩全部A+）<br>Personal Introduction: Computer lover(MY COMPUTER MARK BEFORE SECONDARY SCHOOL IS ALL A+)");
-    }
-
-    function pw_not_entered() {
-        document.write("You failed to visit this website.");
-        document.write("<p>Code:401 (No password entered)</p>");
-    }
-
-    enterpw();
 </script>
-<p align="center">2023 BY---ANDYCHAN,A STUDENT STUDY AT HKTATHMSS~~~</p>
+<p align="center">2023 BY---ANDYCHAN, A STUDENT STUDY AT HKTATHMSS~~~</p>
 </body>
 </html>
