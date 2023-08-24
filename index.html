@@ -32,11 +32,11 @@
 <meta charset="UTF-8">
 <h1>Welcome to Andy's site</h1>
 <p align="right">
-    <a href="/about">关于About| </a>
-    <a href="/sharing">分享sharing| </a>
-    <a href="/update">更新Update| </a>
-    <a href="/disclaimer">免责声明DISCLAIMER| </a>
-    <a href="/contactme">联络我Contact me </a>
+    <a href="/about">关于About </a>|
+    <a href="/sharing">分享sharing </a>|
+    <a href="/update">更新Update </a>|
+    <a href="/disclaimer">免责声明DISCLAIMER </a>|
+    <a href="/contactme">联络我Contact me </a>|
 </p>
 <p>
     Years until My 18th birthday: <span id="years"></span> years
@@ -49,7 +49,8 @@
     var y2k = new Date("April 26, 2028 00:00:00");
     var seconds = (y2k - now) / 1000;
     var years = seconds / 3600 / 24 / 365;
-    document.getElementById("years").textContent = years.toFixed(2);
+    var roundedYears = Math.round(years);
+    document.getElementById("years").textContent = roundedYears;
 
     warn("ROBOT ATTACK IS NOT ALLOWED");
 
