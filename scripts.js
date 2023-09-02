@@ -5,9 +5,3 @@
     var years = seconds / 3600 / 24 / 365;
     var roundedYears = Math.round(years);
     document.getElementById("years").textContent = roundedYears;
-
-    warn("ROBOT ATTACK IS NOT ALLOWED");
-
-    function warn(message) {
-        console.log(message);
-    }
