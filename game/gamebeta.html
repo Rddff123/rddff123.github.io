@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Avoidance Game</title>
+  <style>
+    #game-canvas {
+      border: 1px solid black;
+    }
+  </style>
+</head>
+<body>
+  <canvas id="game-canvas" width="400" height="400"></canvas>
+  <div id="timer"></div>
+
+  <script>
+    // Game Variables
+    var canvas = document.getElementById("game-canvas");
+    var ctx = canvas.getContext("2d");
+    var player = { x: canvas.width / 2, y: canvas.height - 30, width: 20, height: 20, speed: 5 };
+    var enemies = [];
+    var score = 0;
+    var startTime = Date.now();
+
+    // Player Controls
+    document.addEventListener("keydown", function (e) {
+      if (e.key === "ArrowLeft" && player.x > 0) {
+        player.x -= player.speed;
+      } else if (e.key === "ArrowRight" && player.x < canvas.width - player.width) {
+        player.x += player.speed;
+      } else if (e.key === "ArrowUp" && player.y > 0) {
+        player.y -= player.speed;
+      } else if (e.key === "ArrowDown" && player.y < canvas.height - player.height) {
+        player.y += player.speed;
+      }
+    });
+
+    // Game Loop
+    function gameLoop() {
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+      updatePlayer();
+      updateEnemies();
+      updateTimer();
+
+      requestAnimationFrame(gameLoop);
+    }
+
+    // Update Player
+    function updatePlayer() {
+      ctx.fillStyle = "blue";
+      ctx.fillRect(player.x, player.y, player.width, player.height);
+    }
+
+    // Create Enemy
+    function createEnemy() {
+      var enemy = { x: Math.random() * (canvas.width - 20), y: 0, width: 20, height: 20, speed: 2 };
+      enemies.push(enemy);
+    }
+
+    // Update Enemies
+    function updateEnemies() {
+      for (var i = 0; i < enemies.length; i++) {
+        var enemy = enemies[i];
+
+        if (enemy.y < canvas.height) {
+          enemy.y += enemy.speed;
+          ctx.fillStyle = "red";
+          ctx.fillRect(enemy.x, enemy.y, enemy.width, enemy.height);
+
+          // Check collision with player
+          if (player.x < enemy.x + enemy.width &&
+              player.x + player.width > enemy.x &&
+              player.y < enemy.y + enemy.height &&
+              player.y + player.height > enemy.y) {
+            // Player got hit, game over
+            enemies = []; // Clear all enemies
+            alert("Game Over! Time: " + getElapsedTime());
+            location.reload();
+          }
+        } else {
+          enemies.splice(i, 1);
+        }
+      }
+    }
+
+    // Update Timer
+    function updateTimer() {
+      var timerElement = document.getElementById("timer");
+      timerElement.innerText = "Time: " + getElapsedTime();
+    }
+
+    // Get Elapsed Time
+    function getElapsedTime() {
+      var currentTime = Date.now();
+      var elapsedTime = Math.floor((currentTime - startTime) / 1000); // in seconds
+      return elapsedTime;
+    }
+
+    // Start Game
+    setInterval(createEnemy, 100); // Create an enemy approximately every 100 milliseconds (10 enemies per second)
+    gameLoop();
+  </script>
+</body>
+</html>
