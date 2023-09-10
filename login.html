@@ -1,41 +1,38 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-<meta charset="UTF-8">
-<title>Login</title>
-    <link rel="stylesheet" href="login.css">
+  <link rel="stylesheet" href="login.css">
+  <title>Admin Login</title>
 </head>
 <body>
-<script>
-function check() {
-  var idd = document.getElementById("ID").value;
-  var password = document.getElementById("password").value;
-
-  if (idd === "Admin" && password === "12345678") {
-    alert("Welcome!");
-  } else {
-    alert("Login Failed");
-    location.reload();
-  }
-}
-</script>
     <section>
         <div class="form-box">
             <div class="form-value">
                 <form action="">
-<h1>Admin Login</h1>
-<h3>Please read <a href="/Terms_of_use">Terms of Use</a> before you Login</h3>
-<h3>Using other people's account to log in is a violation of the <a href="/Terms_of_use">Terms of Use</a> of this website and is illegal.</h3>
-<p>User ID (Your Working ID):</p><input type="text" id="ID">
-<p>Password:</p><input type="password" id="password">
-<p></p>
-<button type="button" onclick="check()">Login</button>
-<p></p>
-<a href="/forget_password">Forget Password?</a>
-<a href="/Terms_of_use">Terms of Use</a>
+                    <h2>Login</h2>
+                    <div class="inputbox">
+                        <ion-icon name="mail-outline"></ion-icon>
+                        <input type="email" required>
+                        <label for="">Email</label>
+                    </div>
+                    <div class="inputbox">
+                        <ion-icon name="lock-closed-outline"></ion-icon>
+                        <input type="password" required>
+                        <label for="">Password</label>
+                    </div>
+                    <div class="forget">
+                        <label for=""><input type="checkbox">Remember Me  <a href="#">Forget Password</a></label>
+                      
+                    </div>
+                    <button>Log in</button>
+                    <div class="register">
+                        <p>Don't have a account <a href="#">Register</a></p>
+                    </div>
                 </form>
             </div>
         </div>
     </section>
+    <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
+    <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
 </body>
 </html>
