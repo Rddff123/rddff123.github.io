@@ -4,7 +4,7 @@ a:link {
 }
 
 a:visited {
-    color: #eb6e6a;
+    color: #FF0000;
     text-decoration: none;
 }
 
@@ -19,6 +19,6 @@ a:active {
 }
 
 body {
-    background-image: url('background1.jpg');
+    background-image: url('/images/indexback.jpg');
     background-size: cover;
 }
