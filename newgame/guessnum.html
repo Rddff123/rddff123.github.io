@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title>Number Guessing Game</title>
+</head>
+
+<body>
+  <h1>Number Guessing Game</h1>
+  <p>Guess a number between 1 and 100:</p>
+  <input type="number" id="guess-input">
+  <button onclick="checkGuess()">Submit</button>
+  <p id="result"></p>
+  <p id="attempts">Attempts: 0</p>
+  <p id="time">Time: Shown after Game</p>
+  <p id="score">Score: 0</p>
+
+  <script>
+    var targetNumber = Math.floor(Math.random() * 100) + 1;
+    var attempts = 0;
+    var startTime = 0;
+    var score = 0;
+
+    function checkGuess() {
+      var guessInput = document.getElementById('guess-input');
+      var result = document.getElementById('result');
+      var attemptsElement = document.getElementById('attempts');
+      var timeElement = document.getElementById('time');
+      var scoreElement = document.getElementById('score');
+
+      var guess = parseInt(guessInput.value);
+      if (isNaN(guess)) {
+        result.textContent = 'Invalid input. Please enter a valid integer number.';
+        return;
+      }
+
+      attempts++;
+      attemptsElement.textContent = 'Attempts: ' + attempts;
+
+      if (guess === targetNumber) {
+        var endTime = new Date().getTime();
+        var timeElapsed = (endTime - startTime) / 1000;
+        timeElement.textContent = 'Time: ' + timeElapsed + ' seconds';
+        score = Math.round(100 - (attempts + (timeElapsed / 2)));
+        scoreElement.textContent = 'Score: ' + score;
+        result.textContent = 'Congratulations! You guessed the correct number.';
+        guessInput.disabled = true;
+      } else if (guess < targetNumber) {
+        result.textContent = 'Too low';
+      } else {
+        result.textContent = 'Too High';
+      }
+    }
+
+    window.onload = function () {
+      startTime = new Date().getTime();
+    };
+  </script>
+
+  <hr>
+  <h1>Record</h1>
+  <h3>Best: Author 92</h3>
+  <h3>Contact Me If You Are Higher Than Me!</h3>
+</body>
+
+</html>
