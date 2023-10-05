@@ -54,12 +54,23 @@
 
     window.onload = function () {
       startTime = new Date().getTime();
+      var guessInput = document.getElementById('guess-input');
+      guessInput.addEventListener('keyup', function(event) {
+        if (event.keyCode === 13) {
+          event.preventDefault();
+          checkGuess();
+        }
+      });
     };
   </script>
 
   <hr>
-  <h1>Record</h1>
-  <h3>Best: Author 92</h3>
+  <h2>Record</h2>
+  <pre>
+  <h3>Best: Dou Dou | 98 | 1.008s | Num=50 | Andy-Proven</h3>
+  <h3>2nd : Mr.Han  | ?  |  ?     |  ？    | Andy-Proven(?: I forget it)</h3>
+  <h3>2nd :   Andy  | 98 | 1.008s | Num=50 | Two-people-Proven/h3>
+  </pre>
   <h3>Contact Me If You Are Higher Than Me!</h3>
 </body>
 
