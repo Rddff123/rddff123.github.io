@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>Shooting Game</title>
+  <style>
+    #game-canvas {
+      border: 1px solid black;
+    }
+  </style>
+</head>
+<body>
+  <h1>Exciting Shooting Game</h1>
+  <button id="start-button">Start</button>
+  <p>Don't let the number of blocks go over 15 or else...</p>
+  <canvas id="game-canvas" width="400" height="400"></canvas>
+  <script>
+    const canvas = document.getElementById("game-canvas");
+    const ctx = canvas.getContext("2d");
+    var num_of_block = 0;
+    let startGame = false;
+    const player = {
+      x: canvas.width / 2,
+      y: canvas.height - 30,
+      width: 20,
+      height: 20,
+      speed: 5
+    };
+
+    const bullets = [];
+    let blocks = [];
+    let score = 0;
+
+    function drawPlayer() {
+      ctx.fillStyle = "blue";
+      ctx.fillRect(player.x, player.y, player.width, player.height);
+    }
+
+    function drawBullets() {
+      ctx.fillStyle = "red";
+      bullets.forEach(bullet => {
+        ctx.fillRect(bullet.x, bullet.y, bullet.width, bullet.height);
+      });
+    }
+
+    function drawBlocks() {
+      ctx.fillStyle = "green";
+      blocks.forEach(block => {
+        ctx.fillRect(block.x, block.y, block.width, block.height);
+      });
+    }
+
+    function updateBullets() {
+      bullets.forEach(bullet => {
+        bullet.y -= bullet.speed;
+      });
+
+      bullets.forEach((bullet, bulletIndex) => {
+        if (bullet.y < 0) {
+          bullets.splice(bulletIndex, 1);
+        } else {
+          blocks.forEach((block, blockIndex) => {
+            if (
+              bullet.x < block.x + block.width &&
+              bullet.x + bullet.width > block.x &&
+              bullet.y < block.y + block.height &&
+              bullet.y + bullet.height > block.y
+            ) {
+              bullets.splice(bulletIndex, 1);
+              blocks.splice(blockIndex, 1);
+              score++;
+            }
+          });
+        }
+      });
+    }
+
+    function createBlock() {
+        if (startGame){
+      num_of_block = num_of_block + 1;
+      const width = 20;
+      const x = Math.random() * (canvas.width - width);
+      const block = {
+        x: x,
+        y: 80,
+        width: width,
+        height: 20,
+        speed: Math.random() * (4 - 1) + 1
+      };
+
+      blocks.push(block);
+    }
+}
+
+    function keyDownHandler(event) {
+      if (event.key === "ArrowLeft" && player.x > 0) {
+        player.x -= player.speed;
+      } else if (event.key === "ArrowRight" && player.x < canvas.width - player.width) {
+        player.x += player.speed;
+      } else if (event.key === " ") { // Spacebar to shoot
+        shootBullet();
+      }
+    }
+
+    function drawScore() {
+      ctx.fillStyle = "black";
+      ctx.font = "16px Arial";
+      ctx.fillText(`Score: ${score}`, 10, 20);
+    }
+
+    function draw() {
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+      drawPlayer();
+      drawBullets();
+      drawBlocks();
+      updateBullets();
+      drawScore();
+
+      if (startGame) {
+        requestAnimationFrame(draw);
+      }
+      if (num_of_block>15){
+        startGame=false;
+        blocks = [];
+        alert("Game Over! Points:" + score );
+        num_of_block = 0
+        score = 0
+      }
+    }
+
+    function shootBullet() {
+        if (startGame) {
+      const bullet = {
+        x: player.x + player.width / 2,
+        y: player.y,
+        width: 5,
+        height: 10,
+        speed: 5
+      };
+
+      bullets.push(bullet);
+    }
+    }
+    document.addEventListener("keydown", keyDownHandler);
+
+    document.getElementById("start-button").addEventListener("click", function() {
+      if (!startGame) {
+        startGame = true;
+        draw();
+      }
+    });
+
+    setInterval(createBlock, 1000); // Create new blocks every second
+  </script>
+</body>
+</html>

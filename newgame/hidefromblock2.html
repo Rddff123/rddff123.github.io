@@ -1,0 +1,287 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <style>
+            #game-canvas {
+      border: 1px solid black;
+    }
+    </style>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Hide From Block</title>
+  <link rel="stylesheet" href="//code.jquery.com/ui/1.13.2/themes/base/jquery-ui.css">
+  <link rel="stylesheet" href="https://jqueryui.com/tabs/resources/demos/style.css">
+  <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
+  <script src="https://code.jquery.com/ui/1.13.2/jquery-ui.js"></script>
+  <script>
+  $( function() {
+    $( "#tabs" ).tabs();
+  } );
+  </script>
+</head>
+<body>
+ 
+<div id="tabs">
+  <ul>
+    <li><a href="#tabs-1">Game</a></li>
+    <li><a href="#tabs-2">How-to-Play</a></li>
+    <li><a href="#tabs-3">Requirement</a></li>
+    <li><a href="#tabs-4">About</a></li>
+  </ul>
+  <div id="tabs-1">
+    <div>
+        <label for="difficulty">Difficulty:</label>
+        <select id="difficulty">
+          <option value="easy">Easy</option>
+          <option value="medium">Medium</option>
+          <option value="hard">Hard</option>
+          <option value="emotional">Emotional Damage Mode</option>
+        </select>
+        <label for="colour">Colour of yourself:</label>
+        <select id="colour">
+          <option value="red">red</option>
+          <option value="blue">blue</option>
+          <option value="green">green</option>
+          <option value="yellow">yellow</option>
+        </select>
+        <button id="start-button">Start Game</button>
+      </div>
+      <canvas id="game-canvas" width="400" height="400"></canvas>
+      <div id="timer"></div>
+      <script>
+        // Game Variables 游戏设定
+          //你妈你看屁
+        var canvas = document.getElementById("game-canvas");
+        var ctx = canvas.getContext("2d");
+        var player = { x: canvas.width / 2, y: canvas.height - 30, width: 20, height: 20, speed: playerspeed() };
+        var enemies = [];
+        var score = 0;
+        var startTime = 0;
+        var difficulty = "easy";
+        var gameStarted = false;
+        var colourSelect = document.getElementById("colour");
+        colourSelect.addEventListener("change", function () {
+        playcolour();
+    });
+    
+        // Player Controls玩家控制
+        document.addEventListener("keydown", function (e) {
+          if (gameStarted) {
+            player.speed=playerspeed()
+            if (e.key === "ArrowLeft" && player.x > 0) {
+              player.x -= player.speed;
+            } else if (e.key === "ArrowRight" && player.x < canvas.width - player.width) {
+              player.x += player.speed;
+            } else if (e.key === "ArrowUp" && player.y > 0) {
+              player.y -= player.speed;
+            } else if (e.key === "ArrowDown" && player.y < canvas.height - player.height) {
+              player.y += player.speed;
+            }
+          }
+        });
+    
+        // Start Button Click 按钮   你妈还看
+        var startButton = document.getElementById("start-button");
+        startButton.addEventListener("click", function () {
+          if (!gameStarted) {
+            var difficultySelect = document.getElementById("difficulty");
+            difficulty = difficultySelect.value;
+            gameStarted = true;
+            startTime = Date.now();
+            startButton.disabled = true;
+            setInterval(createEnemy, getEnemyCreationInterval());
+            gameLoop();
+          }
+        });
+    
+        // Game Loop 循环
+        function gameLoop() {
+          ctx.clearRect(0, 0, canvas.width, canvas.height);
+    
+          if (gameStarted) {
+            playcolour();
+            updatePlayer();
+            updateEnemies();
+            updateTimer();
+            requestAnimationFrame(gameLoop);
+          }
+        }
+        // Colour 
+        function playcolour() {
+          var colour = colourSelect.value;
+    
+          switch (colour) {
+            case "red":
+              return "red";
+              break;
+            case "blue":
+              return "blue";
+              break;
+            case "green":
+              return "green";
+              break;
+            case "yellow":
+              return "yellow"
+              break;
+            default:
+              return "black"
+              break;
+      }
+    }
+        playcolour();
+        // Update Player 玩家更新你干嘛
+        function updatePlayer() {
+          ctx.fillStyle = playcolour();
+          ctx.fillRect(player.x, player.y, player.width, player.height);
+        }
+    
+        // Create Enemy 敌人
+        function createEnemy() {
+          if (gameStarted){
+          var enemy = { x: Math.random() * (canvas.width - 20), y: 0, width: 20, height: 20, speed: getEnemySpeed() };
+          enemies.push(enemy);
+          }
+        }
+    
+        // Update Enemies 更新敌人
+        function updateEnemies() {
+          if (gameStarted){
+          for (var i = 0; i < enemies.length; i++) {
+            var enemy = enemies[i];
+    
+            if (enemy.y < canvas.height) {
+              enemy.y += enemy.speed;
+              ctx.fillStyle = "red";
+              ctx.fillRect(enemy.x, enemy.y, enemy.width, enemy.height);
+    
+              // Check collision with player 你死了没
+              if (player.x < enemy.x + enemy.width &&
+                  player.x + player.width > enemy.x &&
+                  player.y < enemy.y + enemy.height &&
+                  player.y + player.height > enemy.y) {
+                // Player got hit, game over
+                gameStarted = false;
+                enemies = []; // Clear all enemies
+                alert("Game Over! Points: " + getElapsedTime());
+                startButton.disabled = false;
+              }
+            } else {
+              enemies.splice(i, 1);
+              
+            }
+            }
+          }
+        }
+    
+        // Update Timer 更新时间
+        function updateTimer() {
+          var timerElement = document.getElementById("timer");
+          timerElement.innerText = "Time: " + getElapsedTime();
+        }
+        // Get Elapsed Time 变秒
+        function getElapsedTime() {
+          var currentTime = Date.now();
+          var elapsedTime = Math.floor((currentTime - startTime) / 1000); // in seconds
+          return elapsedTime;
+        }
+    
+        // Get Enemy Speed based on Difficulty 敌人变速度
+        function getEnemySpeed() {
+          switch (difficulty) {
+            case "easy":
+              return 2;
+            case "medium":
+              return 6;
+            case "hard":
+              return 8;
+            case "emotional":
+              return 20
+            default:
+              return 2;
+          }
+        }
+    
+        // Get player speed 玩家速度
+        function playerspeed() {
+          switch (difficulty) {
+            case "easy":
+              return 9;
+            case "medium":
+              return 7;
+            case "hard":
+              return 7;
+            case "emotional":
+              return 5
+            default:
+              return 9;
+          }
+        }
+    
+        // Get Enemy Creation Interval based on Difficulty 敌人生产速度
+        function getEnemyCreationInterval() {
+          switch (difficulty) {
+            case "easy":
+              return 1000;
+            case "medium":
+              return 400;
+            case "hard":
+              return 200;
+            case "emotional":
+              return 150
+            default:
+              return 1000;
+          }
+        }
+      </script>
+      </div>
+  <div id="tabs-2">
+    <p>How to Play:</p>
+<ul>
+  <!--不是大哥，教程代码都要看？？？？？？？-->
+  <li>LEFT Arrow: Move LEFT</li>
+  <li>RIGHT Arrow: Move RIGHT</li>
+  <li>Up Arrow: Move UP</li>
+  <li>Down Arrow: Move DOWN</li>
+</ul>  
+<p>Avoid From Getting Hurt By The Unkind Blocks! If you get, <b>GAME<i> OVER !!!!!!!!!!!</i></b></p>
+<p>When you survived for 1 second, 1 point get! Seems easy? Try <b><i>NEW MODE: EMOTIONAL DAMAGE MODE</i></b> !</p>
+  </div>
+  <div id="tabs-3">
+    <h2>Requirement Of The Game</h2>
+    <!--看什麽看，老子不會怎麽了，**-->
+    <!--First UL(FU) for listing Broswer,Sys etc-->
+    <ul>
+      <!--List for broswer-->
+      <li>
+          <h2>Broswer:</h2>
+    <!--Fu bro list close    -->
+      </li>
+      <!--More UL(MU) for Broswer-->
+      <ul>
+               <li>Google Chrome <b> (Recommended)</b></li>
+               <li>Microsoft Edge</li>
+               <li>Firefox</li>
+               <li>Opera</li>
+               <li>Internet Explorer</li>
+               <li>Safari</li>
+               <li>No support on Netscape &#40; I'm so curious why so many people still use it)</li>
+               <li>All Should Be Latest Version</li>
+        <!--MU for broswer inf-->
+        </ul>
+      <li>
+    
+    <h2>System:</h2></li>
+    <ul>
+               <li>Windows 7 or Above</li>
+               <li>No limitation on MacOS, iOS & Android Unsupported, Unknown on Linux</li>
+               </ul>
+
+</div>
+<div id="tabs-4">
+    <h2>Hide From Blocks<sup>TM</sup>, by Andy Chan, 2023</h2>
+</div>
+</div>
+ 
+ 
+</body>
+</html>
