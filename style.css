@@ -25,17 +25,17 @@ section {
   justify-content: center;
   align-items: center;
 }
-section:nth-child(1) {
-  color: #078025;
-}
-section:nth-child(2) {
-  color: rgb(11, 185, 185);
-  background: #e0ffff;
-}
 section:nth-child(3) {
-  color: #e0ffff;
+  color: #22be49;
 }
 section:nth-child(4) {
+  color: rgb(55, 114, 114);
+  background: #e0ffff;
+}
+section:nth-child(5) {
+  color: #e0ffff;
+}
+section:nth-child(6) {
   color: #06168d;
     background: #e0ffff;
 }
