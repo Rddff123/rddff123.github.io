@@ -62,6 +62,7 @@
         var enemies = [];
         var score = 0;
         var startTime = 0;
+        var level = 1;
         var difficulty = "easy";
         var gameStarted = false;
         var colourSelect = document.getElementById("colour");
@@ -97,14 +98,12 @@
             setInterval(createEnemy, getEnemyCreationInterval());
             gameLoop();
           }
-        });
-    
+        })
         // Game Loop 循环
         function gameLoop() {
           ctx.clearRect(0, 0, canvas.width, canvas.height);
     
           if (gameStarted) {
-            console.log("Code:gameLoop()'s running")
             playcolour();
             updatePlayer();
             updateEnemies();
@@ -156,7 +155,6 @@
         // Create Enemy 敌人
         function createEnemy() {
           if (gameStarted){
-            console.log("Code:createEnemy() is running")
           var enemy = { x: Math.random() * (canvas.width - 20), y: 0, width: 20, height: 20, speed: getEnemySpeed() };
           enemies.push(enemy);
           }
@@ -165,7 +163,6 @@
         // Update Enemies 更新敌人
         function updateEnemies() {
           if (gameStarted){
-          console.log("Code:updateEnemies() is running")
           for (var i = 0; i < enemies.length; i++) {
             var enemy = enemies[i];
     
@@ -180,11 +177,14 @@
                   player.y < enemy.y + enemy.height &&
                   player.y + player.height > enemy.y) {
                 // Player got hit, game over
+                startButton.disabled = false;
                 gameStarted = false;
                 enemies = []; // Clear all enemies
                 alert("Game Over! Points: " + getElapsedTime());
-                startButton.disabled = false;
-                gameStarted = false;
+                if (getElapsedTime() > 0){
+                  alert("LEVEL UP!");
+                  ++level;
+                }
               }
             } else {
               enemies.splice(i, 1);
@@ -197,13 +197,17 @@
         // Update Timer 更新时间
         function updateTimer() {
           var timerElement = document.getElementById("timer");
-          timerElement.innerText = "Points: " + getElapsedTime();
+          timerElement.innerText = "Points: " + getElapsedTime() + " \nLEVEL: " + getLEVEL();
+
         }
-        // Get Elapsed Time 变秒
+// Get Elapsed Time 变秒
         function getElapsedTime() {
           var currentTime = Date.now();
           var elapsedTime = Math.floor((currentTime - startTime) / 1000); // in seconds
           return elapsedTime;
+        }
+        function getLEVEL(){
+          return level;
         }
     
         // Get Enemy Speed based on Difficulty 敌人变速度
@@ -303,7 +307,8 @@
 <div id="tabs-4">
     <h2>Hide From Blocks 2<sup>TM</sup>, poudly developed by Andy Chan, 2023</h2>
 </div>
-<div id="tabs-5"><h2>Fix bugs </div>
+<div id="tabs-5"><h2>Fix bugs, maintaining LEVEL, more lovely colour for you to choose :)</h2>
+<p>Plan: 1. More colour  2.Colourful the GUI and the pictures</p></div>
 </div>
  
  
