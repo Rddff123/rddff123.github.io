@@ -10,11 +10,11 @@ body {
 }
 a:visited, a:link {
   text-decoration: none;
-  color: #089c46;
+  color: #ffc400;
 }
 a:hover,a:active{
   text-decoration: underline;
-  color: #20dd6f;
+  color: #00ff6a;
 }
 p{
   text-align: center;
@@ -123,4 +123,12 @@ section .text-container .text-box h3 {
     transform: translateX(0);
     opacity: 1;
   }
+}
+button{
+  background-color: #10e067;
+  border-radius: 7px;  
+  height: 25px;
+  color: azure;
+  font-family: 'Source Sans Pro', sans-serif;
+  border: none;
 }
