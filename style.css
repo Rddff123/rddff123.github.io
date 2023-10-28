@@ -1,4 +1,4 @@
-@import url("https://fonts.googleapis.com/css2?family=Asap&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Asap&display=swap");   /*--CSS FOr index page--/
 * {
   margin: 0;
   padding: 0;
@@ -131,4 +131,8 @@ button{
   color: azure;
   font-family: 'Source Sans Pro', sans-serif;
   border: none;
+}
+#BottomInf{
+  height: 200px;
+  background-color: #f9f9f938;
 }
