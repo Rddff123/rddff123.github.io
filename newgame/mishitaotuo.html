@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8"> 
+  <title>文字密室逃脫遊戲</title>
+</head>
+<body>
+  <h1>文字密室逃脫遊戲(BETA繁體中文測試版)</h1>
+  <p id="description"></p>
+  <p id="hint"></p>
+  <input type="text" id="input">
+  <button onclick="checkAnswer()">提交</button>
+
+  <script>
+    var currentRoom = 1;
+    function displayRoom(room) {
+      var description = document.getElementById("description");
+      var hint = document.getElementById("hint");
+      var input = document.getElementById("input");
+    description.innerHTML = getRoomDescription(room);
+      hint.innerHTML = getRoomHint(room);
+      input.value = "";
+    }
+    function getRoomDescription(room) {
+      switch (room) {
+        case 1:
+          return "這是房間1的描述。";
+        case 2:
+          return "這是房間2的描述。";
+        case 3:
+          return "這是房間3的描述。";
+        // 添加更多房間的描述
+        default:
+          return "恭喜！！！";
+      }
+    }
+
+    function getRoomHint(room) {
+      switch (room) {
+        case 1:
+          return "1978年，道格拉斯·麥克阿瑟將軍帶領著114514個士兵前往戰鬥。密碼（四位密碼）：";
+        case 2:
+          return "提示：可能房間一的話有用。密碼2（六位）：";
+        case 3:
+          return "你打開了電腦，電腦突然白屏";
+        // 添加更多房間的提示
+        default:
+          return "通關，測試完畢，正常！";
+      }
+    }
+
+    function checkAnswer() {
+  var input = document.getElementById("input").value;
+  var correctAnswer = getCorrectAnswer(currentRoom);
+
+  if (correctAnswer.includes(input.toLowerCase())) {
+    currentRoom++;
+    displayRoom(currentRoom);
+  } else {
+    alert("回答不正確。請再試一次。");
+  }
+}
+
+function getCorrectAnswer(room) {
+  switch (room) {
+    case 1:
+      return "1978";
+    case 2:
+      return "114514";
+    case 3:
+      return ["原神，啓動", "原神啓動", "原神，启动", "原神启动"];
+    // 添加更多房間的正確答案
+    default:
+      return "";
+  }
+}
+
+    displayRoom(currentRoom);
+  </script>
+</body>
+</html>
