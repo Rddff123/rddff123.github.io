@@ -54,21 +54,22 @@
       <canvas id="game-canvas" width="400" height="400"></canvas>
       <div id="timer"></div>
       <script>
-        // Game Variables 游戏设定
-          //你妈你看屁
-        var canvas = document.getElementById("game-canvas");
-        var ctx = canvas.getContext("2d");
-        var player = { x: canvas.width / 2, y: canvas.height - 30, width: 20, height: 20, speed: playerspeed() };
-        var enemies = [];
-        var score = 0;
-        var startTime = 0;
-        var level = 1;
-        var difficulty = "easy";
-        var gameStarted = false;
-        var colourSelect = document.getElementById("colour");
-        colourSelect.addEventListener("change", function () {
+// Game Variables
+var canvas = document.getElementById("game-canvas");
+var ctx = canvas.getContext("2d");
+var player = { x: canvas.width / 2, y: canvas.height - 30, width: 20, height: 20, speed: playerspeed() };
+var enemies = [];
+var score = 0;
+var startTime = 0;
+var level = 1;
+var difficulty = "easy";
+var gameStarted = false;
+var enemyInterval; // Variable to store the interval ID
+var colourSelect = document.getElementById("colour")
+colourSelect.addEventListener("change", function () {
         playcolour();
     });
+    
     
         // Player Controls玩家控制
         document.addEventListener("keydown", function (e) {
@@ -86,32 +87,32 @@
           }
         });
     
-        // Start Button Click 按钮   你妈还看
-        var startButton = document.getElementById("start-button");
-        startButton.addEventListener("click", function () {
-          if (!gameStarted) {
-            var difficultySelect = document.getElementById("difficulty");
-            difficulty = difficultySelect.value;
-            gameStarted = true;
-            startTime = Date.now();
-            startButton.disabled = true;
-            setInterval(createEnemy, getEnemyCreationInterval());
-            gameLoop();
-          }
-        })
+// Start Button Click
+var startButton = document.getElementById("start-button");
+startButton.addEventListener("click", function () {
+  if (!gameStarted) {
+    var difficultySelect = document.getElementById("difficulty");
+    difficulty = difficultySelect.value;
+    gameStarted = true;
+    startTime = Date.now();
+    startButton.disabled = true;
+    enemyInterval = setInterval(createEnemy, getEnemyCreationInterval()); // Store interval ID in the variable
+    gameLoop();
+  }
+});
         // Game Loop 循环
         function gameLoop() {
           ctx.clearRect(0, 0, canvas.width, canvas.height);
     
-          if (gameStarted) {
             playcolour();
             updatePlayer();
             updateEnemies();
             updateTimer();
+            if (gameStarted){
             requestAnimationFrame(gameLoop);
-          }
+            }  
         }
-        // Colour 
+// Colour 
         function playcolour() {
           var colour = colourSelect.value;
 //              
@@ -161,10 +162,12 @@
         }
     
         // Update Enemies 更新敌人
-        function updateEnemies() {
-          if (gameStarted){
-          for (var i = 0; i < enemies.length; i++) {
+// Update Enemies
+function updateEnemies() {
+  if (gameStarted) {
+    for (var i = 0; i < enemies.length; i++) {
             var enemy = enemies[i];
+            console.log(enemy);
     
             if (enemy.y < canvas.height) {
               enemy.y += enemy.speed;
@@ -178,14 +181,15 @@
                   player.y + player.height > enemy.y) {
                 // Player got hit, game over
                 startButton.disabled = false;
-                gameStarted = false;
-                enemies = []; // Clear all enemies
-                alert("Game Over! Points: " + getElapsedTime());
-                if (getElapsedTime() > 0){
-                  alert("LEVEL UP!");
-                  ++level;
-                }
-              }
+  gameStarted = false;
+  enemies = []; // Clear all enemies
+  clearInterval(enemyInterval); // Clear the enemy generation interval
+  alert("Game Over! Points: " + getElapsedTime());
+  if (getElapsedTime() > 0) {
+    alert("LEVEL UP!");
+    ++level;
+  }
+}
             } else {
               enemies.splice(i, 1);
               
@@ -307,8 +311,8 @@
 <div id="tabs-4">
     <h2>Hide From Blocks 2<sup>TM</sup>, poudly developed by Andy Chan, 2023</h2>
 </div>
-<div id="tabs-5"><h2>Fix bugs, maintaining LEVEL, more lovely colour for you to choose :)</h2>
-<p>Plan: 1. More colour  2.Colourful the GUI and the pictures</p></div>
+<div id="tabs-5"><h2>Fix bugs of double enemy, a mass of enemy bugs, maintaining LEVEL, more lovely colour for you to choose :)</h2>
+<p>Plan: 1. More colour?  2.Colour the GUI and the pictures(MAYBE?)</p></div>
 </div>
  
  
