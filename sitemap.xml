@@ -8,53 +8,73 @@
 
 
 <url>
-  <loc>https://andychan.xyz.wf/</loc>
-  <lastmod>2023-10-05T12:51:54+00:00</lastmod>
+  <loc>https://andychan.lag.tf/</loc>
+  <lastmod>2023-11-27T11:52:46+00:00</lastmod>
   <priority>1.00</priority>
 </url>
 <url>
-  <loc>https://andychan.xyz.wf/about</loc>
-  <lastmod>2023-10-05T12:51:54+00:00</lastmod>
+  <loc>https://andychan.lag.tf/about</loc>
+  <lastmod>2023-11-27T11:52:46+00:00</lastmod>
   <priority>0.80</priority>
 </url>
 <url>
-  <loc>https://andychan.xyz.wf/update</loc>
-  <lastmod>2023-10-05T12:51:54+00:00</lastmod>
+  <loc>https://andychan.lag.tf/update</loc>
+  <lastmod>2023-11-27T11:52:46+00:00</lastmod>
   <priority>0.80</priority>
 </url>
 <url>
-  <loc>https://andychan.xyz.wf/sharing</loc>
-  <lastmod>2023-10-05T12:51:54+00:00</lastmod>
+  <loc>https://andychan.lag.tf/sharing</loc>
+  <lastmod>2023-11-27T11:52:46+00:00</lastmod>
   <priority>0.80</priority>
 </url>
 <url>
-  <loc>https://andychan.xyz.wf/contactme</loc>
-  <lastmod>2023-10-05T12:51:54+00:00</lastmod>
+  <loc>https://andychan.lag.tf/contactme</loc>
+  <lastmod>2023-11-27T11:52:46+00:00</lastmod>
   <priority>0.80</priority>
 </url>
 <url>
-  <loc>https://andychan.xyz.wf/disclaimer</loc>
-  <lastmod>2023-10-05T12:51:54+00:00</lastmod>
+  <loc>https://andychan.lag.tf/disclaimer</loc>
+  <lastmod>2023-11-27T11:52:46+00:00</lastmod>
   <priority>0.80</priority>
 </url>
 <url>
-  <loc>https://andychan.xyz.wf/game</loc>
-  <lastmod>2023-10-05T12:51:54+00:00</lastmod>
+  <loc>https://andychan.lag.tf/game</loc>
+  <lastmod>2023-11-27T11:52:46+00:00</lastmod>
   <priority>0.80</priority>
 </url>
 <url>
-  <loc>https://andychan.xyz.wf/login</loc>
-  <lastmod>2023-10-05T12:51:54+00:00</lastmod>
+  <loc>https://andychan.lag.tf/login</loc>
+  <lastmod>2023-11-27T11:52:46+00:00</lastmod>
   <priority>0.80</priority>
 </url>
 <url>
-  <loc>https://andychan.xyz.wf/newgame/hidefromblock</loc>
-  <lastmod>2023-10-05T12:51:54+00:00</lastmod>
+  <loc>https://andychan.lag.tf/newgame/hidefromblock</loc>
+  <lastmod>2023-11-27T11:52:46+00:00</lastmod>
   <priority>0.64</priority>
 </url>
 <url>
-  <loc>https://andychan.xyz.wf/newgame/guessnum</loc>
-  <lastmod>2023-10-05T12:51:54+00:00</lastmod>
+  <loc>https://andychan.lag.tf/newgame/hidefromblock2</loc>
+  <lastmod>2023-11-27T11:52:46+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://andychan.lag.tf/newgame/shootinggame</loc>
+  <lastmod>2023-11-27T11:52:46+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://andychan.lag.tf/newgame/guessnum</loc>
+  <lastmod>2023-11-27T11:52:46+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://andychan.lag.tf/newgame/mishitaotuo</loc>
+  <lastmod>2023-11-27T11:52:46+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://andychan.lag.tf/newgame/passwordchecker</loc>
+  <lastmod>2023-11-27T11:52:46+00:00</lastmod>
   <priority>0.64</priority>
 </url>
 
