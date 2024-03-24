@@ -89,6 +89,12 @@
         function do_things() {
             healthload();
             check_armor();
+            if (player_healthValue == 0){
+                alert("You lost!")
+            }
+            if (robot_healthValue == 0){
+                alert("You Win!")
+            }
         }
 
         do_things();
