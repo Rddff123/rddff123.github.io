@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>bullshot roulette</title>
+</head>
+
+<body>
+    <h1>bullshot roulette</h1>
+    <p>Total Armor: <span id="total_arm"></span></p>
+    <p>Round: <span id="rounds">1</span></p>
+
+    <fieldset>
+        <h1>Robot</h1>
+        <p>Health = <span id="robot_healthValueid">5</span></p>
+    </fieldset>
+
+    <fieldset>
+        <h1>You</h1>
+        <p>Health = <span id="player_healthValueid">5</span></p>
+        <button id="player_button" onclick="playershot()" disabled>Shot</button>
+    </fieldset>
+
+    <script>
+        var round = 1;
+        var robot_healthValue = 5;
+        var player_healthValue = 5;
+        var total_armor = Math.round(Math.random() * 10);
+        var armor_list = [];
+
+        if (total_armor <= 2) {
+            total_armor += 6;
+        }
+
+        for (let i = 0; i < total_armor; i++) {
+            var add_list = Math.floor(Math.random() * 2);
+            armor_list.push(add_list.toString());
+        }
+
+        function healthload() {
+            document.getElementById("robot_healthValueid").innerHTML = robot_healthValue;
+            document.getElementById("player_healthValueid").innerHTML = player_healthValue;
+        }
+
+        function check_armor() {
+            if (total_armor === 0 && robot_healthValue > 0 && player_healthValue > 0) {
+                alert("Next Round!");
+                round+=1;
+                document.getElementById("rounds").innerHTML = round;
+                total_armor = Math.round(Math.random() * 10);
+                armor_list = [];
+
+                if (total_armor <= 2) {
+                    total_armor += 6;
+                }
+
+                for (let i = 0; i < total_armor; i++) {
+                    var add_list = Math.floor(Math.random() * 2);
+                    armor_list.push(add_list.toString());
+                }
+            }
+            document.getElementById("total_arm").innerHTML = total_armor;
+        }
+
+        function robotshot() {
+            document.getElementById("player_button").disabled = true;
+
+            if (armor_list[0] === "1") {
+                player_healthValue -= 1;
+                armor_list.shift();
+            }
+            total_armor -= 1;
+            do_things()
+            document.getElementById("player_button").disabled = false;
+
+        }
+
+        function playershot() {
+            if (armor_list[0] === "1") {
+                robot_healthValue -= 1;
+            }
+
+            armor_list.shift();
+            total_armor -= 1;
+            do_things()
+            setTimeout(robotshot, 1000);
+            document.getElementById("player_button").disabled = true;
+        }
+
+        function do_things() {
+            healthload();
+            check_armor();
+        }
+
+        do_things();
+        document.getElementById("total_arm").innerHTML = total_armor;
+        document.getElementById("player_button").disabled = false;
+    </script>
+</body>
+</html>
