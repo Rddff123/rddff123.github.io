@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contact - Andy</title>
+    <style>
+        .copyright {
+            background-color: #333;
+            color: #ffffffc5;
+            width: 100%;
+            text-align: center;
+            padding: 10px 0; /* Add some padding for better appearance */
+            position: relative; /* Ensure it stays at the bottom */
+            left: 0; /* Align to the left */
+            text-align: bottom; /* Align to the bottom */
+        }
+        body {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            background-color: #e0f7fa;
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 20px;
+        }
+        .container {
+            text-align: center;
+            opacity: 0;
+            transform: translateY(50px);
+            transition: opacity 1s ease, transform 1s ease;
+        }
+        .container.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        h1 {
+            color: #00695c;
+            font-size: 2.5em;
+        }
+        h2 {
+            color: #004d40;
+            font-size: 2em;
+            margin-top: 20px;
+        }
+        p {
+            color: #004d40;
+            font-size: 1.2em;
+            margin: 20px 0;
+        }
+        form {
+            background-color: #ffffff;
+            border-radius: 8px;
+            padding: 20px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            width: 80%;
+            max-width: 600px;
+            margin: 20px auto;
+        }
+        input, textarea {
+            width: 100%;
+            padding: 10px;
+            margin: 10px 0;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            font-size: 1em;
+        }
+        button {
+            background-color: #00695c;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            padding: 10px 15px;
+            font-size: 1em;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #004d40;
+        }
+        @media (max-width: 600px) {
+            h1 {
+                font-size: 2em;
+            }
+            h2 {
+                font-size: 1.5em;
+            }
+            p {
+                font-size: 1em;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container" id="contact">
+        <h1>Contact Me</h1>
+        <p>Feel free to reach out!</p>
+        <form id="contactForm">
+            <input type="text" placeholder="Your Name" required>
+            <input type="email" placeholder="Your Email" required>
+            <textarea rows="4" placeholder="Your Message" required></textarea>
+            <button type="submit">Send Message</button>
+        </form>
+    </div>
+    
+    <div class="copyright">
+        <p id="copyrightText">New website for andychan.xyz.wf &copy; 2022-2024 Andy All Rights Reserved</p>
+    </div>
+
+    <script>
+        window.onload = function() {
+            const containers = document.querySelectorAll('.container');
+            containers.forEach(container => {
+                container.classList.add('visible');
+            });
+            
+            // Update copyright year
+            const currentYear = new Date().getFullYear();
+            document.getElementById('copyrightText').innerHTML = `New website for andychan.xyz.wf &copy; 2022-${currentYear} Andy All Rights Reserved`;
+        };
+
+        document.getElementById('contactForm').onsubmit = function(event) {
+            event.preventDefault();
+            alert('Your message has been sent!');
+            this.reset(); // Reset the form fields after submission
+            //Building 
+        };
+    </script>
+</body>
+</html>

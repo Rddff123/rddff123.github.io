@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Introduction - Andy</title>
+    <style>
+        .copyright {
+            background-color: #333;
+            color: #ffffffc5;
+            width: 100%;
+            text-align: center;
+            padding: 10px 0; /* Add some padding for better appearance */
+            position: relative; /* Ensure it stays at the bottom */
+            left: 0; /* Align to the left */
+        }
+        body {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            background-color: #e0f7fa;
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 20px;
+        }
+        .container {
+            text-align: center;
+            opacity: 0;
+            transform: translateY(50px);
+            transition: opacity 1s ease, transform 1s ease;
+        }
+        .container.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        h1 {
+            color: #00695c;
+            font-size: 2.5em;
+        }
+        h2 {
+            color: #004d40;
+            font-size: 2em;
+            margin-top: 20px;
+        }
+        p {
+            color: #004d40;
+            font-size: 1.2em;
+            margin: 20px 0;
+        }
+        .skills, .projects, .contact {
+            margin-top: 20px;
+            background-color: #ffffff;
+            border-radius: 8px;
+            padding: 20px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+            width: 80%;
+            max-width: 600px;
+        }
+        @media (max-width: 600px) {
+            h1 {
+                font-size: 2em;
+            }
+            h2 {
+                font-size: 1.5em;
+            }
+            p {
+                font-size: 1em;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container" id="intro">
+        <h1>Hi, I'm Andy!</h1>
+        <p>I'm a passionate programmer with a love for creating innovative solutions.</p>
+        <p>My journey in coding has led me through various languages and frameworks,</p>
+        <p>and I enjoy tackling challenges that push my skills further.</p>
+    </div>
+
+    <div class="skills container" id="skills">
+        <h2>Skills</h2>
+        <p>Proficient in:</p>
+        <ul>
+            <li>Python (Especially Tkinter and Requests)</li>
+            <li>C++ on Memory data changing</li>
+            <li>HTML, CSS, Javascript</li>
+        </ul>
+    </div>
+
+    <div class="projects container" id="projects">
+        <h2>Projects</h2>
+        <p>Here are a few projects I've worked on:</p>
+        <ul>
+            <li><strong>Personal Portfolio:</strong> A website showcasing my work.</li>
+            <li><strong>Task Manager App:</strong> A full-stack application for managing tasks.</li>
+            <li><strong>Weather App:</strong> A simple app that provides weather updates.</li>
+        </ul>
+    </div>
+
+    <div class="contact container" id="contact">
+        <h2>Contact Me</h2>
+        <p>Feel free to reach out!</p>
+        <p>Please go ahead contact page</p>
+        <p>I'll get back to you as soon as possible.</p>
+    </div>
+    
+    <div class="copyright">
+        <p id="copyrightText">New website for andychan.xyz.wf &copy; 2022-2024 Andy All Rights Reserved</p>
+    </div>
+
+    <script>
+        window.onload = function() {
+            const containers = document.querySelectorAll('.container');
+            containers.forEach(container => {
+                container.classList.add('visible');
+            });
+            
+            // Update copyright year
+            const currentYear = new Date().getFullYear();
+            document.getElementById('copyrightText').innerHTML = `New website for andychan.xyz.wf &copy; 2022-${currentYear} Andy All Rights Reserved`;
+        };
+    </script>
+</body>
+</html>

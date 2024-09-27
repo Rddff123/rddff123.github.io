@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Update Webpage</title>
+    <style>
+        /* Add some basic styling to make it look nice */
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+        .update-block {
+            background-color: #f7f7f7;
+            padding: 20px;
+            margin-bottom: 20px;
+            border: 1px solid #ddd;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        .update-block h3 {
+            margin-top: 0;
+            font-weight: bold;
+            color: #333;
+        }
+        .update-block h4 {
+            margin-top: 10px;
+            font-weight: bold;
+            color: #666;
+        }
+        .update-block p {
+            margin-bottom: 20px;
+        }
+    </style>
+</head>
+<body>
+
+    <h1>Updates</h1>
+    <h2>Weekly Check: Done [<span id="date"></span>]</h2>
+
+    <script>
+        const today = new Date();
+        const options = { year: 'numeric', month: 'long', day: 'numeric' };
+        const formattedDate = today.toLocaleDateString('en-US', options);
+        
+        document.getElementById('date').textContent = formattedDate;
+    </script>
+
+    <div class="update-block">
+        <h3>Update: Removed Hidefromblock</h3>
+        <h4>Released on: 2024-09-27</h4>
+        <p>Update: Our website moved to andy.coms.hk! Cool Domain! Enjoy!</p>
+    </div>
+    <div class="update-block">
+        <h3>Update: Removed Hidefromblock</h3>
+        <h4>Released on: 2023-12-02</h4>
+        <p>Update: Removed Hidefromblock as that is just a piece of bad work!</p>
+    </div>
+    <div class="update-block">
+        <h3>Update: New Game Added!</h3>
+        <h4>Released on: 2023-12-01</h4>
+        <p>Update: New Game: Minecraft 1.8.8 and 1.5 added!</p>
+    </div>
+    <div class="update-block">
+        <h3>Update: Language Update</h3>
+        <h4>Released on: 2023-03-08</h4>
+        <p>After now, update only use English. Update Login</p>
+    </div>
+    <div class="update-block">
+        <h3>Update: Suggestion Form</h3>
+        <h4>Released on: 2023-08-21</h4>
+        <p>更新：增加建议表 Add Suggestion Form</p>
+    </div>
+    <div class="update-block">
+        <h3>Update: Monthly Check</h3>
+        <h4>Released on: 2023-08-12</h4>
+        <p>更新：增加月度检查 Add Monthly Check</p>
+    </div>
+    <div class="update-block">
+        <h3>Update: Home Page Background</h3>
+        <h4>Released on: 2023-08-09</h4>
+        <p>更新：增加home页面背景 Add background at home page</p>
+    </div>
+    <div class="update-block">
+        <h3>Update: Bug Fix</h3>
+        <h4>Released on: 2023-08-06</h4>
+        <p>更新：修复重大bug。 Fix big bugs.</p>
+    </div>
+    <div class="update-block">
+        <h3>Update: Sharing Interface</h3>
+        <h4>Released on: 2023-08-06</h4>
+        <p>更新：更新“分享”界面。<br>Update: Update a place of "sharing".</p>
+    </div>
+    <div class="update-block">
+        <h3>Update: Birthday Countdown</h3>
+        <h4>Released on: 2023-08-06</h4>
+        <p>更新：把“Hours until 18th years old”改成 "Years until..."<br>Change month to years of my 18th birthday</p>
+    </div>
+    <div class="update-block">
+        <h3>Update: Update Interface</h3>
+        <h4>Released on: 2023-08-06</h4>
+        <p>更新：修复“更新”界面开头没放大的bug。<br>Update: Update no big word of the title of the "Update".</p>
+    </div>
+    <div class="update-block">
+        <h3>Update: Update Interface</h3>
+        <h4>Released on: 2023-08-06</h4>
+        <p>更新：更新“更新”界面。<br>Update: Update a place of "Update".</p>
+    </div>
+    <div class="update-block">
+        <h3>Update: Pages Update</h3>
+        <h4>Released on: 2023-03-12</h4>
+        <p>更新：页面大更新 Update of Pages</p>
+    </div>
+    <div class="update-block">
+        <h3>Update: About Update</h3>
+        <h4>Released on: 2023-03-11</h4>
+        <p>更新：更新關於 Update About</p>
+    </div>
+    <div class="update-block">
+        <h3>Update: Update Update</h3>
+        <h4>Released on: 2023-03-10</h4>
+        <p>更新：更新更新 Update update</p>
+    </div>
+    <div class="update-block">
+        <h3>Update: Update Index</h3>
+        <h4>Released on: 2023-03-09</h4>
+        <p>更新：更新 Update Index</p>
+    </div>
+    <div class="update-block">
+        <h3>Update: Hidefromblock Game Start</h3>
+        <h4>Released on: 2023-03-07</h4>
+        <p>Update: Hidefromblock Game start opening!</p>
+    </div>
+    <div class="update-block">
+        <h3>Update: Login Update</h3>
+        <h4>Released on: 2023-03-06</h4>
+        <p>Update: Login update, improving the GUI of the page</p>
+    </div>
+    <div class="update-block">
+        <h3>Update: Beauty and Bug Fixes</h3>
+        <h4>Released on: 2023-03-05</h4>
+        <p>Update: Beauty of the Website and Fix some Bugs and Improve GUI</p>
+    </div>
+    <div class="update-block">
+        <h3>Site Maintenance</h3>
+        <h4>Released on: 2023-05-10</h4>
+        <p>Site-maintenance From 18:00 to 19:00 (5/10)</p>
+    </div>
+
+</body>
+</html>
