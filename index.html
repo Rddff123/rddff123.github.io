@@ -6,11 +6,13 @@
     <meta name="description" content="Welcome to my personal website. Learn more about me, my interests, and get in touch!">
     <title>About Me</title>
     <style>
-        body {
+        html, body {
+            height: 100%;
             margin: 0;
             font-family: Arial, sans-serif;
             background-color: #1aac9bec;
-            overflow: hidden;
+            display: flex;
+            flex-direction: column;
         }
         nav {
             background-color: #333;
@@ -28,11 +30,11 @@
             text-decoration: underline;
         }
         .container {
+            flex: 1;
             display: flex;
             flex-direction: column;
             justify-content: center;
             align-items: center;
-            height: calc(100vh - 60px);  /* Adjust for nav height */
             opacity: 0;
             transform: translateY(30px);
             transition: opacity 1s ease, transform 1s ease;
@@ -52,6 +54,15 @@
             margin: 20px 0;
             max-width: 600px;
         }
+        .copyright {
+            background-color: #333;
+            color: #004d40;
+            text-align: center; /* This centers the text */
+            padding: 10px 0;
+            width: 100%; /* Ensure full width */
+            display: flex; /* Use flexbox for centering */
+            justify-content: center; /* Center the text */
+        }
     </style>
 </head>
 <body>
@@ -68,11 +79,17 @@
         <p>Here, you can find information about my projects and how to get in touch with me.</p>
         <p>Feel free to explore!</p>
     </div>
+    <div class="copyright">
+        <p id="copyrightText">New website for andychan.xyz.wf &copy; 2022-2024 Andy All Rights Reserved</p>
+    </div>
 
     <script>
         window.onload = function() {
             const container = document.getElementById('intro');
             container.classList.add('visible');
+            // Update copyright year
+            const currentYear = new Date().getFullYear();
+            document.getElementById('copyrightText').innerHTML = `New website for andychan.xyz.wf &copy; 2022-${currentYear} Andy All Rights Reserved`;
         };
     </script>
 </body>
