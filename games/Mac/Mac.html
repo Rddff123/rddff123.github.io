@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Loading Bar</title>
+    <title>Loading Bar with Draggable Notepad</title>
     <style>
         body {
             display: flex;
@@ -38,11 +38,11 @@
         }
         #taskBar {
             position: fixed;
-            bottom: 0;
+            bottom: 20px;  /* Adjusted to create space */
             width: 70%;
             height: 60px;
             background-color: rgba(255, 255, 255, 0.8);
-            border-radius: 20px 20px 0 0;
+            border-radius: 15px; /* Rounded corners */
             display: flex;
             justify-content: space-around;
             align-items: center;
@@ -54,6 +54,50 @@
             width: 40px;
             height: auto;
             cursor: url('pointer.svg'), auto; /* Change cursor to pointer for icons */
+            transition: transform 0.3s; /* Add transition for scaling */
+        }
+        #taskBar img:hover {
+            transform: scale(1.3); /* Scale up the icon on hover */
+        }
+        #notepad {
+            position: absolute;
+            width: 300px;
+            height: 300px;
+            background-color: white;
+            border: 2px solid #888;
+            border-radius: 10px;
+            display: none;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
+            overflow: hidden;
+        }
+        #notepadHeader {
+            background-color: rgba(255, 255, 255, 0.7);
+            height: 30px;
+            display: flex;
+            align-items: center;
+            padding: 0 10px;
+            cursor: url('cursor.svg'), auto; /* Custom cursor for the header */
+        }
+        #notepadClose {
+            width: 10px;
+            height: 10px;
+            background-color: red; /* Pure red button */
+            border: none;
+            border-radius: 50%;
+            margin-right: 10px;
+            cursor: url('cursor.svg'), auto;
+            transition: transform 0.3s;
+        }
+        #notepadClose:hover {
+            transform: scale(1.1);
+        }
+        #notepadText {
+            width: 100%;
+            height: calc(100% - 30px);
+            border: none;
+            padding: 10px;
+            resize: none;
+            outline: none;
         }
     </style>
 </head>
@@ -65,52 +109,53 @@
 
     <div id="taskBar">
         <img src="chrome.png" alt="Chrome" onclick="alertASAP()">
-        <img src="Notepad.png" alt="Notepad" onclick="alertASAP()">
+        <img src="Notepad.png" alt="Notepad" id="notepadIcon" onclick="toggleNotepad()">
         <img src="question.png" alt="Question" onclick="alertASAP()">
     </div>
 
+    <div id="notepad">
+        <div id="notepadHeader">
+            <button id="notepadClose" onclick="closeNotepad()"></button>
+            Notepad
+        </div>
+        <textarea id="notepadText" placeholder="Type your notes here..."></textarea>
+    </div>
+
     <script>
-function loadBar() {
-    const loadingBar = document.getElementById('loadingBar');
-    const loadingBarContainer = document.getElementById('loadingBarContainer');
-    const googleIcon = document.getElementById('googleIcon');
-    const taskBar = document.getElementById('taskBar');
-    let progress = 0;
+        function loadBar() {
+            const loadingBar = document.getElementById('loadingBar');
+            const loadingBarContainer = document.getElementById('loadingBarContainer');
+            const googleIcon = document.getElementById('googleIcon');
+            const taskBar = document.getElementById('taskBar');
+            let progress = 0;
 
-    // Hide cursor when loading starts
-    document.body.style.cursor = 'none';
+            document.body.style.cursor = 'none';
+            taskBar.style.opacity = '0';
 
-    // Hide taskbar during loading
-    taskBar.style.opacity = '0';
+            setTimeout(() => {
+                progress = 10;
+                loadingBar.style.width = progress + '%';
+            }, 0);
 
-    setTimeout(() => {
-        progress = 10;
-        loadingBar.style.width = progress + '%';
-    }, 0);
+            setTimeout(() => {
+                progress = 70;
+                loadingBar.style.width = progress + '%';
+            }, 3000);
 
-    setTimeout(() => {
-        progress = 70;
-        loadingBar.style.width = progress + '%';
-    }, 3000);
+            setTimeout(() => {
+                progress = 100;
+                loadingBar.style.width = progress + '%';
+            }, 6000);
 
-    setTimeout(() => {
-        progress = 100;
-        loadingBar.style.width = progress + '%';
-    }, 6000);
+            setTimeout(() => {
+                loadingBarContainer.style.display = 'none';
+                googleIcon.style.display = 'none';
+                document.body.style.cursor = 'url("cursor.svg"), auto';
+                changeBackground();
+                taskBar.style.opacity = '1';
+            }, 8000);
+        }
 
-    setTimeout(() => {
-        loadingBarContainer.style.display = 'none';
-        googleIcon.style.display = 'none';
-        
-        // Show custom cursor once loading is complete
-        document.body.style.cursor = 'url("cursor.svg"), auto';
-        
-        changeBackground();
-        
-        // Show taskbar after loading
-        taskBar.style.opacity = '1';
-    }, 8000);
-}
         function changeBackground() {
             document.body.style.backgroundImage = "url('back.jpg')";
             document.body.style.backgroundSize = "cover";
@@ -118,6 +163,39 @@ function loadBar() {
 
         function alertASAP() {
             alert("ASAP!");
+        }
+
+        function toggleNotepad() {
+            const notepad = document.getElementById('notepad');
+            notepad.style.display = notepad.style.display === 'none' || notepad.style.display === '' ? 'block' : 'none';
+            if (notepad.style.display === 'block') {
+                makeNotepadDraggable();
+            }
+        }
+
+        function closeNotepad() {
+            document.getElementById('notepad').style.display = 'none';
+        }
+
+        function makeNotepadDraggable() {
+            const notepad = document.getElementById('notepad');
+            const header = document.getElementById('notepadHeader');
+            let offsetX, offsetY;
+
+            header.onmousedown = function(e) {
+                offsetX = e.clientX - notepad.getBoundingClientRect().left;
+                offsetY = e.clientY - notepad.getBoundingClientRect().top;
+
+                document.onmousemove = function(e) {
+                    notepad.style.left = (e.clientX - offsetX) + 'px';
+                    notepad.style.top = (e.clientY - offsetY) + 'px';
+                };
+
+                document.onmouseup = function() {
+                    document.onmousemove = null;
+                    document.onmouseup = null;
+                };
+            };
         }
 
         loadBar();
