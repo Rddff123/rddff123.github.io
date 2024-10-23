@@ -28,7 +28,7 @@
             overflow: hidden;
             height: 5px;
             max-width: 400px;
-            margin-top: 40px;
+            margin-top: 20px;
         }
         #loadingBar {
             height: 100%;
@@ -53,10 +53,7 @@
         #taskBar img {
             width: 40px;
             height: auto;
-            cursor: pointer; /* Change cursor to pointer for clickable icons */
-        }
-        #taskBar img:hover {
-            cursor: url('pointer.svg'), auto; /* Change cursor on hover */
+            cursor: url('pointer.svg'), auto; /* Change cursor to pointer for icons */
         }
     </style>
 </head>
@@ -70,68 +67,50 @@
         <img src="chrome.png" alt="Chrome" onclick="alertASAP()">
         <img src="Notepad.png" alt="Notepad" onclick="alertASAP()">
         <img src="question.png" alt="Question" onclick="alertASAP()">
-        <img src="question.png" alt="Question" onclick="alertASAP()">
-        <img src="question.png" alt="Question" onclick="alertASAP()">
-        <img src="question.png" alt="Question" onclick="alertASAP()">
-        <img src="question.png" alt="Question" onclick="alertASAP()">
-        <img src="question.png" alt="Question" onclick="alertASAP()">
-        <img src="question.png" alt="Question" onclick="alertASAP()">
     </div>
 
     <script>
-        function loadBar() {
-            const loadingBar = document.getElementById('loadingBar');
-            const loadingBarContainer = document.getElementById('loadingBarContainer');
-            const googleIcon = document.getElementById('googleIcon');
-            const taskBar = document.getElementById('taskBar');
-            let progress = 0;
+function loadBar() {
+    const loadingBar = document.getElementById('loadingBar');
+    const loadingBarContainer = document.getElementById('loadingBarContainer');
+    const googleIcon = document.getElementById('googleIcon');
+    const taskBar = document.getElementById('taskBar');
+    let progress = 0;
 
-            // Hide cursor when loading starts
-            document.body.style.cursor = 'none';
+    // Hide cursor when loading starts
+    document.body.style.cursor = 'none';
 
-            // Hide taskbar during loading
-            taskBar.style.opacity = '0';
+    // Hide taskbar during loading
+    taskBar.style.opacity = '0';
 
-            setTimeout(() => {
-                progress = 10;
-                loadingBar.style.width = progress + '%';
-            }, 0);
+    setTimeout(() => {
+        progress = 10;
+        loadingBar.style.width = progress + '%';
+    }, 0);
 
-            setTimeout(() => {
-                progress = 70;
-                loadingBar.style.width = progress + '%';
-            }, 3000);
+    setTimeout(() => {
+        progress = 70;
+        loadingBar.style.width = progress + '%';
+    }, 3000);
 
-            setTimeout(() => {
-                progress = 100;
-                loadingBar.style.width = progress + '%';
-            }, 6000);
+    setTimeout(() => {
+        progress = 100;
+        loadingBar.style.width = progress + '%';
+    }, 6000);
 
-            setTimeout(() => {
-                loadingBarContainer.style.display = 'none';
-                googleIcon.style.display = 'none';
-                
-                // Show normal cursor once loading is complete
-                document.body.style.cursor = 'url("cursor.svg"), auto';
-                
-                changeBackground();
-                
-                // Show taskbar after loading
-                taskBar.style.opacity = '1';
-
-                // Add event listeners to taskbar icons
-                const taskIcons = taskBar.getElementsByTagName('img');
-                for (let icon of taskIcons) {
-                    icon.addEventListener('mouseenter', () => {
-                        document.body.style.cursor = 'url("pointer.svg"), auto'; // Change to pointer cursor
-                    });
-                    icon.addEventListener('mouseleave', () => {
-                        document.body.style.cursor = 'url("cursor.svg"), auto'; // Change back to normal cursor
-                    });
-                }
-            }, 8000);
-        }
-
+    setTimeout(() => {
+        loadingBarContainer.style.display = 'none';
+        googleIcon.style.display = 'none';
+        
+        // Show custom cursor once loading is complete
+        document.body.style.cursor = 'url("cursor.svg"), auto';
+        
+        changeBackground();
+        
+        // Show taskbar after loading
+        taskBar.style.opacity = '1';
+    }, 8000);
+}
         function changeBackground() {
             document.body.style.backgroundImage = "url('back.jpg')";
             document.body.style.backgroundSize = "cover";
