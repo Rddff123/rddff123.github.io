@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Disclaimer</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 20px;
+            background-color: #f4f4f4;
+            color: #333;
+        }
+        .container {
+            max-width: 600px;
+            margin: auto;
+            background: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+        h1 {
+            text-align: center;
+            color: #2c3e50;
+        }
+        p {
+            line-height: 1.6;
+        }
+        footer {
+            text-align: center;
+            margin-top: 20px;
+            font-size: 0.9em;
+            color: #777;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Disclaimer</h1>
+        <p>
+            The website holder carries NO RESPONSIBILITY at any time, in any form, and in any kind for any actions taken based on the information provided on this website. By accessing this site, you acknowledge and agree to this disclaimer.
+        </p>
+        <p>
+            It is your responsibility to verify any information before relying on it. The website may contain links to third-party sites, and we are not responsible for their content or accuracy.
+        </p>
+        <p>
+            If you do not agree with this disclaimer, please do not use this website.
+        </p>
+    </div>
+    <footer id="copyrightText">New website for andychan.xyz.wf &copy; 2022-2024 Andy All Rights Reserved</footer>
+
+    <script>
+        window.onload = function() {
+            const containers = document.querySelectorAll('.container');
+            containers.forEach(container => {
+                container.classList.add('visible');
+            });
+            
+            // Update copyright year
+            const currentYear = new Date().getFullYear();
+            document.getElementById('copyrightText').innerHTML = `New website for andychan.xyz.wf &copy; 2022-${currentYear} Andy All Rights Reserved`;
+        };
+    </script>
+</body>
+</html>

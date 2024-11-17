@@ -45,9 +45,13 @@
         
         document.getElementById('date').textContent = formattedDate;
     </script>
-
     <div class="update-block">
-        <h3>Update: Removed Hidefromblock</h3>
+        <h3>Update: New domain +1 !!!</h3>
+        <h4>Released on: 2024-11-17</h4>
+        <p>Update: Our website moved again from andy.coms.hk to nm.cloudns.be as the old domain doesn't support SSL(HTTPS) and showing our website is dangerous. Funny Domain! Enjoy!</p>
+    </div>
+    <div class="update-block">
+        <h3>Update: New domain!!!</h3>
         <h4>Released on: 2024-09-27</h4>
         <p>Update: Our website moved to andy.coms.hk! Cool Domain! Enjoy!</p>
     </div>
@@ -64,7 +68,8 @@
     <div class="update-block">
         <h3>Update: Language Update</h3>
         <h4>Released on: 2023-03-08</h4>
-        <p>After now, update only use English. Update Login</p>
+        <p>After now, update only use English.</p>
+        <p>Update Login</p>
     </div>
     <div class="update-block">
         <h3>Update: Suggestion Form</h3>
@@ -124,7 +129,10 @@
     <div class="update-block">
         <h3>Update: Update Index</h3>
         <h4>Released on: 2023-03-09</h4>
+        <p>Updated Index</p>
+        <p>Chinese addedx</p>
         <p>更新：更新 Update Index</p>
+        <p>更新：加入中文</p>
     </div>
     <div class="update-block">
         <h3>Update: Hidefromblock Game Start</h3>
@@ -146,6 +154,30 @@
         <h4>Released on: 2023-05-10</h4>
         <p>Site-maintenance From 18:00 to 19:00 (5/10)</p>
     </div>
+    <div class="update-block">
+        <h3>Major Site Maintenance</h3>
+        <h4>Released on: 2023-02-10</h4>
+        <p>Site-maintenance From 18:00 to 19:00</p>
+        <p>Normal not being able to visit the website/showing dangerous website</p>
+    </div>
+    <div class="update-block">
+        <h3>BREAKING NEWS</h3>
+        <h4>Released on: 2022-12-30</h4>
+        <p>This website created! Domain is andychan.xyz.wf! I will update more funny things here.</p>
+    </div>
+        <footer id="copyrightText">New website for andychan.xyz.wf &copy; 2022-2024 Andy All Rights Reserved</footer>
 
+    <script>
+        window.onload = function() {
+            const containers = document.querySelectorAll('.container');
+            containers.forEach(container => {
+                container.classList.add('visible');
+            });
+            
+            // Update copyright year
+            const currentYear = new Date().getFullYear();
+            document.getElementById('copyrightText').innerHTML = `New website for andychan.xyz.wf &copy; 2022-${currentYear} Andy All Rights Reserved`;
+        };
+    </script>
 </body>
 </html>
