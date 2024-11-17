@@ -16,7 +16,6 @@
             }
             nav {
                 background-color: #5e25b9;
-                ;
                 color: white;
                 padding: 15px;
                 text-align: center;
@@ -106,7 +105,7 @@
                                 g--;
                                 yield `#${r.toString(16).padStart(2, '0')}${g.toString(16).padStart(2, '0')}${b.toString(16).padStart(2, '0')}`;
                             }
-                            while (r > 3) {
+                            while (r > 50) {
                                 r--;
                                 yield `#${r.toString(16).padStart(2, '0')}${g.toString(16).padStart(2, '0')}${b.toString(16).padStart(2, '0')}`;
                             }
@@ -122,6 +121,8 @@
                     function updateColor() {
                         const color = generator.next().value;
                         textElements.forEach(el => el.style.color = color);
+                        // Log the RGB values to console
+                        console.log(`RGB: (${r}, ${g}, ${b})`);
                         setTimeout(updateColor, 10); // Adjust timing as necessary
                     }
 
