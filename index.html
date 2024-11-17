@@ -121,9 +121,7 @@
                     function updateColor() {
                         const color = generator.next().value;
                         textElements.forEach(el => el.style.color = color);
-                        // Log the RGB values to console
-                        console.log(`RGB: (${r}, ${g}, ${b})`);
-                        setTimeout(updateColor, 10); // Adjust timing as necessary
+
                     }
 
                     updateColor();
