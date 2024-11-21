@@ -4,7 +4,7 @@
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <meta name="description" content="Welcome to my personal website. Learn more about me, my interests, and get in touch!">
-        <title>About Me</title>
+        <title>Andy's Website</title>
         <style>
             html, body {
                 height: 100%;
@@ -132,5 +132,24 @@
                 changeColor();
             };
         </script>
+        <script>
+    let originalTitle = "Andy's Website";
+    let timeoutId;
+
+    window.addEventListener('blur', function() {
+        document.title = "QAQ Please stay here!";
+        clearTimeout(timeoutId); // Clear any existing timeout
+    });
+
+    window.addEventListener('focus', function() {
+        document.title = "AwA Welcome!";
+        timeoutId = setTimeout(function() {
+            document.title = originalTitle;
+        }, 3000);
+    });
+
+
+</script>
+
     </body>
 </html>
