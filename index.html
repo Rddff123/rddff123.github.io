@@ -1,155 +1,176 @@
 <!DOCTYPE html>
 <html lang="en">
-    <head>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <meta name="description" content="Welcome to my personal website. Learn more about me, my interests, and get in touch!">
-        <title>Andy's Website</title>
-        <style>
-            html, body {
-                height: 100%;
-                margin: 0;
-                font-family: Arial, sans-serif;
-                background-color: #181a1b;
-                display: flex;
-                flex-direction: column;
-            }
-            nav {
-                background-color: #5e25b9;
-                color: white;
-                padding: 15px;
-                text-align: center;
-            }
-            nav a {
-                color: white;
-                margin: 0 15px;
-                text-decoration: none;
-                font-weight: bold;
-            }
-            nav a:hover {
-                text-decoration: underline;
-            }
-            .container {
-                flex: 1;
-                display: flex;
-                flex-direction: column;
-                justify-content: center;
-                align-items: center;
-                opacity: 0;
-                transform: translateY(30px);
-                transition: opacity 1s ease, transform 1s ease;
-                text-align: center;
-            }
-            .container.visible {
-                opacity: 1;
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Welcome to my personal website. Learn more about me, my interests, and get in touch!">
+    <title>Andy's Website</title>
+    <style>
+        html, body {
+            height: 100%;
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background-color: #181a1b;
+            display: flex;
+            flex-direction: column;
+        }
+        nav {
+            background-color: #5e25b9;
+            color: white;
+            padding: 15px;
+            text-align: center;
+        }
+        nav a {
+            color: white;
+            margin: 0 15px;
+            text-decoration: none;
+            font-weight: bold;
+        }
+        nav a:hover {
+            text-decoration: underline;
+        }
+        .container {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            opacity: 0;
+            transform: translateY(30px);
+            transition: opacity 1s ease, transform 1s ease;
+            text-align: center;
+        }
+        .container.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        .copyright {
+            background-color: #333;
+            color: #93a023;
+            text-align: center;
+            padding: 10px 0;
+            width: 100%;
+            display: flex;
+            justify-content: center;
+        }
+        .star {
+            position: absolute;
+            border-radius: 50%;
+            width: 5px;
+            height: 5px;
+            pointer-events: none;
+            animation: fall linear forwards;
+        }
+        @keyframes fall {
+            0% {
                 transform: translateY(0);
+                opacity: 1;
             }
-            .copyright {
-                background-color: #333;
-                color: #93a023;
-                text-align: center;
-                padding: 10px 0;
-                width: 100%;
-                display: flex;
-                justify-content: center;
+            100% {
+                transform: translateY(100vh);
+                opacity: 0;
             }
-        </style>
-    </head>
-    <body>
-        <nav>
-            <a href="#home">Home</a>
-            <a href="/about">About</a>
-            <a href="/disclaimer">disclaimer</a>
-            <a href="/contact">Contact</a>
-            <a href="/game">Game</a>
-            <a href="/update">Updates</a>
-        </nav>
-        <div class="container newlycolor" id="intro">
-            <h1>Hello, I'm Andy!</h1>
-            <p>Welcome to my personal website.</p>
-            <p>Here, you can find information about my projects and how to get in touch with me.</p>
-            <p>Feel free to explore!</p>
-        </div>
-        <div class="copyright">
-            <p id="copyrightText">New website for andychan.xyz.wf &copy; 2022-2024 Andy All Rights Reserved</p>
-        </div>
-    
-        <script>
-            window.onload = function() {
-                const container = document.getElementById('intro');
-                container.classList.add('visible');
-                // Update copyright year
-                const currentYear = new Date().getFullYear();
-                document.getElementById('copyrightText').innerHTML = `New website for andychan.xyz.wf &copy; 2022-${currentYear} Andy All Rights Reserved`;
-    
-                // Color Transition Functionality
-                let r = 52, g = 186, b = 235;
+        }
+    </style>
+</head>
+<body>
+    <nav>
+        <a href="#home">Home</a>
+        <a href="/about">About</a>
+        <a href="/disclaimer">Disclaimer</a>
+        <a href="/contact">Contact</a>
+        <a href="/game">Game</a>
+        <a href="/update">Updates</a>
+    </nav>
+    <div class="container newlycolor" id="intro">
+        <h1>Hello, I'm Andy!</h1>
+        <p>Welcome to my personal website.</p>
+        <p>Here, you can find information about my projects and how to get in touch with me.</p>
+        <p>Feel free to explore!</p>
+    </div>
+    <div class="copyright">
+        <p id="copyrightText">New website for andychan.xyz.wf &copy; 2022-2024 Andy All Rights Reserved</p>
+    </div>
+    <div class="magic-wand" id="wand"></div>
 
-                function changeColor(element) {
-                    const textElements = document.querySelectorAll('.newlycolor p, .newlycolor h1, #copyrightText');
+    <script>
+        window.onload = function() {
+            const container = document.getElementById('intro');
+            container.classList.add('visible');
+            const currentYear = new Date().getFullYear();
+            document.getElementById('copyrightText').innerHTML = `New website for andychan.xyz.wf &copy; 2022-${currentYear} Andy All Rights Reserved`;
 
-                    function* colorGenerator() {
-                        while (true) {
-                            while (g < 252) {
-                                g++;
-                                yield `#${r.toString(16).padStart(2, '0')}${g.toString(16).padStart(2, '0')}${b.toString(16).padStart(2, '0')}`;
-                            }
-                            while (r < 252) {
-                                r++;
-                                yield `#${r.toString(16).padStart(2, '0')}${g.toString(16).padStart(2, '0')}${b.toString(16).padStart(2, '0')}`;
-                            }
-                            while (b > 3) {
-                                b--;
-                                yield `#${r.toString(16).padStart(2, '0')}${g.toString(16).padStart(2, '0')}${b.toString(16).padStart(2, '0')}`;
-                            }
-                            while (g > 3) {
-                                g--;
-                                yield `#${r.toString(16).padStart(2, '0')}${g.toString(16).padStart(2, '0')}${b.toString(16).padStart(2, '0')}`;
-                            }
-                            while (r > 50) {
-                                r--;
-                                yield `#${r.toString(16).padStart(2, '0')}${g.toString(16).padStart(2, '0')}${b.toString(16).padStart(2, '0')}`;
-                            }
-                            while (b < 252) {
-                                b++;
-                                yield `#${r.toString(16).padStart(2, '0')}${g.toString(16).padStart(2, '0')}${b.toString(16).padStart(2, '0')}`;
-                            }
-                        }
+            // Color Transition Functionality
+            let r = 52, g = 186, b = 235;
+
+            function changeColor(element) {
+                const textElements = document.querySelectorAll('.newlycolor p, .newlycolor h1, #copyrightText');
+
+                function* colorGenerator() {
+                    while (true) {
+                        while (g < 252) { g++; yield `#${r.toString(16).padStart(2, '0')}${g.toString(16).padStart(2, '0')}${b.toString(16).padStart(2, '0')}`; }
+                        while (r < 252) { r++; yield `#${r.toString(16).padStart(2, '0')}${g.toString(16).padStart(2, '0')}${b.toString(16).padStart(2, '0')}`; }
+                        while (b > 3) { b--; yield `#${r.toString(16).padStart(2, '0')}${g.toString(16).padStart(2, '0')}${b.toString(16).padStart(2, '0')}`; }
+                        while (g > 3) { g--; yield `#${r.toString(16).padStart(2, '0')}${g.toString(16).padStart(2, '0')}${b.toString(16).padStart(2, '0')}`; }
+                        while (r > 50) { r--; yield `#${r.toString(16).padStart(2, '0')}${g.toString(16).padStart(2, '0')}${b.toString(16).padStart(2, '0')}`; }
+                        while (b < 252) { b++; yield `#${r.toString(16).padStart(2, '0')}${g.toString(16).padStart(2, '0')}${b.toString(16).padStart(2, '0')}`; }
                     }
-
-                    const generator = colorGenerator();
-
-                    function updateColor() {
-                        const color = generator.next().value;
-                        textElements.forEach(el => el.style.color = color);
-                        // Log the RGB values to console
-                        setTimeout(updateColor, 1); // Adjust timing as necessary
-                    }
-
-                    updateColor();
                 }
 
-                changeColor();
-            };
-        </script>
-        <script>
-    let originalTitle = "Andy's Website";
-    let timeoutId;
+                const generator = colorGenerator();
 
-    window.addEventListener('blur', function() {
-        document.title = "QAQ Please stay here!";
-        clearTimeout(timeoutId); // Clear any existing timeout
-    });
+                function updateColor() {
+                    const color = generator.next().value;
+                    textElements.forEach(el => el.style.color = color);
+                    setTimeout(updateColor, 1);
+                }
 
-    window.addEventListener('focus', function() {
-        document.title = "AwA Welcome!";
-        timeoutId = setTimeout(function() {
-            document.title = originalTitle;
-        }, 3000);
-    });
+                updateColor();
+            }
 
+            changeColor();
 
-</script>
+            // Magic Wand Cursor Functionality
+            const wand = document.getElementById('wand');
+            const colors = ['gold', 'green', 'red', 'blue', 'white'];
 
-    </body>
+            document.addEventListener('mousemove', (event) => {
+                wand.style.left = `${event.clientX}px`;
+                wand.style.top = `${event.clientY}px`;
+                if (Math.random() < 0.5) { // 50% chance
+                    createStar(event.clientX, event.clientY);
+                }
+            });
+
+            function createStar(x, y) {
+                const star = document.createElement('div');
+                star.className = 'star';
+                star.style.left = `${x}px`;
+                star.style.top = `${y}px`;
+                star.style.backgroundColor = colors[Math.floor(Math.random() * colors.length)];
+                star.style.animationDuration = `${Math.random() * 2 + 1}s`;
+                document.body.appendChild(star);
+                setTimeout(() => {
+                    star.remove();
+                }, 2000);
+            }
+        };
+
+        // Title Change Functionality
+        let originalTitle = "Andy's Website";
+        let timeoutId;
+
+        window.addEventListener('blur', function() {
+            document.title = "QAQ Please stay here!";
+            clearTimeout(timeoutId);
+        });
+
+        window.addEventListener('focus', function() {
+            document.title = "AwA Welcome!";
+            timeoutId = setTimeout(function() {
+                document.title = originalTitle;
+            }, 3000);
+        });
+    </script>
+</body>
 </html>
