@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ACoin Price Simulation</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+            text-align: center;
+        }
+        #graph {
+            width: 100%;
+            height: 300px;
+        }
+        input {
+            margin: 10px;
+            padding: 10px;
+            width: 80%;
+        }
+        #log {
+            margin-top: 20px;
+            text-align: left;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+            height: 200px;
+        }
+        textarea {
+            width: 100%;
+            height: 200px;
+            resize: none;
+            font-family: monospace;
+            margin-top: 20px;
+        }
+    </style>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+
+    <h1>ACoin Price Simulation</h1>
+    <p>Original Price: <span id="original-price"></span></p>
+    <p>Your money: <span id="capital">200000</span></p>
+    <input type="number" id="coins" placeholder="Enter number of coins to buy" min="1">
+    <button id="simulate-button" onclick="simulate()">Simulate</button>
+    
+    <h2>Price Changes Over Time</h2>
+    <canvas id="graph"></canvas>
+    <p id="result"></p>
+
+    <textarea id="log" readonly></textarea>
+
+    <script>
+        let originalPrice = Math.floor(Math.random() * (20000 - 200 + 1)) + 200;
+        let capital = 50000; // Initialize capital variable
+        document.getElementById('original-price').innerText = originalPrice;
+        document.getElementById('capital').innerText = capital;
+
+        function simulate() {
+            let coins_value = parseInt(document.getElementById('coins').value);
+            const button = document.getElementById('simulate-button');
+            button.disabled = true; // Disable button
+
+            if (isNaN(coins_value) || coins_value <= 0) {
+                alert("Please enter a valid number of coins.");
+                button.disabled = false; // Re-enable button
+                return;
+            }
+            if (capital - (coins_value * originalPrice) < 0) {
+                alert("Oops! You have not enough money!");
+                button.disabled = false; // Re-enable button
+                return;
+            }
+
+            let totalInvestment = originalPrice * coins_value;
+            capital -= totalInvestment; // Update capital
+            document.getElementById('capital').innerText = capital;
+
+            // Log initial purchase details
+            logTransaction(originalPrice, coins_value, totalInvestment, 'Initial Purchase');
+
+            const priceChanges = Array.from({ length: 30 }, () => (Math.random() * 0.2 - 0.1).toFixed(4));
+            let prices = [originalPrice];
+            let currentPrice = originalPrice;
+
+            priceChanges.forEach((change, index) => {
+                setTimeout(() => {
+                    currentPrice *= (1 + parseFloat(change));
+                    prices.push(currentPrice);
+                    updateGraph(prices);
+
+                    // Log price change
+                    logTransaction(currentPrice, coins_value, totalInvestment, 'Price Change at Step ' + (index + 1));
+
+                    if (index === priceChanges.length - 1) {
+                        let finalAmount = currentPrice * coins_value;  
+                        let profitLoss = finalAmount - totalInvestment;
+                        let profitLossPercentage = ((profitLoss / totalInvestment) * 100).toFixed(2);
+                        document.getElementById('result').innerText = 
+                            profitLoss >= 0 
+                                ? `You earned: $${profitLoss.toFixed(2)} (${profitLossPercentage}%)` 
+                                : `You lost: $${-profitLoss.toFixed(2)} (${profitLossPercentage}%)`;
+
+                        capital += Math.round(finalAmount); // Update capital with final amount
+                        document.getElementById('capital').innerText = capital;
+                        button.disabled = false; // Re-enable button after simulation
+                        coins_value = currentPrice;
+                        document.getElementById('original-price').innerText = Math.round(currentPrice);
+                        originalPrice = coins_value;
+                    }
+                }, index * 1000);
+            });
+        }
+
+        function logTransaction(price, coins, cost, type) {
+            const logTextArea = document.getElementById('log');
+            logTextArea.value += `${type} - Price: $${price.toFixed(2)}, Coins: ${coins}, Cost: $${cost.toFixed(2)}\n`;
+            logTextArea.scrollTop = logTextArea.scrollHeight; // Auto-scroll to the bottom
+        }
+
+        function updateGraph(prices) {
+            const ctx = document.getElementById('graph').getContext('2d');
+            if (window.myChart) {
+                window.myChart.destroy();
+            }
+            window.myChart = new Chart(ctx, {
+                type: 'line',
+                data: {
+                    labels: prices.map((_, index) => index + 1),
+                    datasets: [{
+                        label: 'ACoin Price',
+                        data: prices,
+                        borderColor: 'rgba(75, 192, 192, 1)',
+                        fill: false
+                    }]
+                },
+                options: {
+                    scales: {
+                        y: {
+                            beginAtZero: true
+                        }
+                    }
+                }
+            });
+        }
+    </script>
+</body>
+</html>
