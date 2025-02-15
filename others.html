@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Game Center</title>
+    <style>
+        body {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            background-color: #e0f7fa;
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 20px;
+        }
+        .container {
+            text-align: center;
+            opacity: 0;
+            transform: translateY(50px);
+            transition: opacity 1s ease, transform 1s ease;
+            margin-top: 20px;
+        }
+        .container.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        h1 {
+            color: #00695c;
+            font-size: 2.5em;
+        }
+        .games {
+            background-color: #ffffff;
+            border-radius: 8px;
+            padding: 20px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+            width: 80%;
+            max-width: 600px;
+        }
+        @media (max-width: 600px) {
+            h1 {
+                font-size: 2em;
+            }
+        }
+
+    </style>
+</head>
+<body>
+
+
+    <div class="container">
+        <h1>Other Games/Projects</h1>
+        <div class="games">
+            <h2>Online Google-Made Mac!</h2>
+            <p>Beta test:<a href="/games/Mac/Mac">here</a></p>
+        </div>
+        <div class="games">
+            <h2>Coin Investor!</h2>
+            <p>Beta test:<a href="/games/coin">here</a></p>
+        </div>
+    </div>
+
+    <script>
+        const containers = document.querySelectorAll('.container');
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                    observer.unobserve(entry.target); // Stop observing after it becomes visible
+                }
+            });
+        });
+
+        containers.forEach(container => {
+            observer.observe(container);
+        });
+    </script>
+    <br>
+            <footer id="copyrightText">New website for andychan.xyz.wf &copy; 2022-2024 Andy All Rights Reserved</footer>
+    
+        <script>
+            window.onload = function() {
+                const containers = document.querySelectorAll('.container');
+                containers.forEach(container => {
+                    container.classList.add('visible');
+                });
+                
+                // Update copyright year
+                const currentYear = new Date().getFullYear();
+                document.getElementById('copyrightText').innerHTML = `New website for andychan.xyz.wf &copy; 2022-${currentYear} Andy All Rights Reserved`;
+            };
+        </script>
+</body>
+</html>

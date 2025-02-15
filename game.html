@@ -3,109 +3,136 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Game Center</title>
+    <title>Minecraft Launcher</title>
     <style>
-        body {
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            background-color: #e0f7fa;
-            font-family: Arial, sans-serif;
+        /* CSS remains the same as it's style-related */
+        * {
             margin: 0;
-            padding: 20px;
-        }
-        .container {
-            text-align: center;
-            opacity: 0;
-            transform: translateY(50px);
-            transition: opacity 1s ease, transform 1s ease;
-            margin-top: 20px;
-        }
-        .container.visible {
-            opacity: 1;
-            transform: translateY(0);
-        }
-        h1 {
-            color: #00695c;
-            font-size: 2.5em;
-        }
-        .games {
-            background-color: #ffffff;
-            border-radius: 8px;
-            padding: 20px;
-            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
-            width: 80%;
-            max-width: 600px;
-        }
-        @media (max-width: 600px) {
-            h1 {
-                font-size: 2em;
-            }
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
         }
 
+        body {
+            background: linear-gradient(135deg, #83a4d4, #b6fbff);
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            background: rgba(255, 255, 255, 0.95);
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+        }
+
+        h1 {
+            color: #2c3e50;
+            text-align: center;
+            margin-bottom: 30px;
+            font-size: 2.5em;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        .version-selector {
+            display: flex;
+            gap: 15px;
+            margin-bottom: 25px;
+        }
+
+        select {
+            flex: 1;
+            padding: 12px;
+            border: 2px solid #3498db;
+            border-radius: 8px;
+            font-size: 16px;
+            background: white;
+            appearance: none;
+            background-image: url("data:image/svg+xml;charset=US-ASCII,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%22292.4%22%20height%3D%22292.4%22%3E%3Cpath%20fill%3D%22%233498db%22%20d%3D%22M287%2069.4a17.6%2017.6%200%200%200-13-5.4H18.4c-5%200-9.3%201.8-12.9%205.4A17.6%2017.6%200%200%200%200%2082.2c0%205%201.8%209.3%205.4%2012.9l128%20127.9c3.6%203.6%207.8%205.4%2012.8%205.4s9.2-1.8%2012.8-5.4L287%2095c3.5-3.5%205.4-7.8%205.4-12.8%200-5-1.9-9.2-5.5-12.8z%22%2F%3E%3C%2Fsvg%3E");
+            background-repeat: no-repeat;
+            background-position: right 10px center;
+            background-size: 12px auto;
+            cursor: pointer;
+        }
+
+        button {
+            padding: 12px 30px;
+            background: #3498db;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-size: 16px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        button:hover {
+            background: #2980b9;
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(52, 152, 219, 0.4);
+        }
+
+        #credits {
+            text-align: center;
+            color: #7f8c8d;
+            margin-top: 15px;
+            font-style: italic;
+        }
+
+        .description {
+            margin: 20px 0;
+            color: #34495e;
+            line-height: 1.6;
+            text-align: center;
+        }
     </style>
 </head>
 <body>
     <div class="container">
-        <h1>Misterpieces</h1>
+        <h1>Minecraft Launcher</h1>
         <div class="games">
-            <h2>Minecraft 1.8.8</h2>
-            <h3>Credits: Andy</h3>
-            <p>A fun sandbox game where you can build and explore your own world!</p>
-            <p>Play now: <a href="/games/Minecraft18">Minecraft 1.8.8</a></p>
-            
-            <h2>Minecraft 1.5.2</h2>
-            <p>Join the adventures of a cheerful cat in this exciting platformer!</p>
-            <p>Play now: <a href="/games/Minecraft15">Minecraft 1.5</a></p>
-
-            <h2>Other Minecraft versions</h2>
-            <p><a href="/games/Minecraft19">1.9</a> <a href="/games/Minecraft111">1.11</a> <a href="/games/Resent">Resent Client</a> <a href="/games/Forge">Forge</a></p>
-        </div>
-    </div>
-
-    <div class="container">
-        <h1>Other Games/Projects</h1>
-        <div class="games">
-            <h2>Online Google-Made Mac!</h2>
-            <p>Beta test:<a href="/games/Mac/Mac">here</a></p>
-        </div>
-        <div class="games">
-            <h2>Coin Investor!</h2>
-            <p>Beta test:<a href="/games/coin">here</a></p>
+            <div class="version-selector">
+                <select id="versionSelect">
+                    <option value="/games/Minecraft15">Minecraft 1.5.2</option>
+                    <option value="/games/Minecraft18">Minecraft 1.8.8</option>
+                    <option value="/games/Minecraft19">Minecraft 1.9</option>
+                    <option value="/games/Minecraft111">Minecraft 1.11</option>
+                    <option value="/games/Resent">Resent Client</option>
+                    <option value="/games/Forge">Forge</option>
+                </select>
+                <button id="playButton">Play Game</button>
+            </div>
+            <p id="credits">Credits: lax1dude, Andy(creator of this website). Please see credit.txt for details.</details></p>
+            <div class="description">
+                <p>Welcome to the Minecraft multiverse! Choose your desired version and start your blocky adventure!</p>
+            </div>
         </div>
     </div>
 
     <script>
-        const containers = document.querySelectorAll('.container');
+        const versionSelect = document.getElementById('versionSelect');
+        const playButton = document.getElementById('playButton');
+        const creditsElement = document.getElementById('credits');
 
-        const observer = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    entry.target.classList.add('visible');
-                    observer.unobserve(entry.target); // Stop observing after it becomes visible
-                }
-            });
+        // Handle game launch
+        playButton.addEventListener('click', () => {
+            const selectedVersion = versionSelect.value;
+            if (selectedVersion) {
+                window.location.href = selectedVersion;
+            }
         });
 
-        containers.forEach(container => {
-            observer.observe(container);
+        // Dynamic credits update
+        versionSelect.addEventListener('change', () => {
+            const selectedVersion = versionSelect.options[versionSelect.selectedIndex].text;
+            creditsElement.textContent = selectedVersion.includes('1.8.8') 
+                ? 'Recoomended Version. Credits: lax1dude, Andy(creator of this website). Please see credit.txt for details.' 
+                : 'Credits: lax1dude, Andy(creator of this website). Please see credit.txt for details.';
         });
     </script>
-    <br>
-            <footer id="copyrightText">New website for andychan.xyz.wf &copy; 2022-2024 Andy All Rights Reserved</footer>
-    
-        <script>
-            window.onload = function() {
-                const containers = document.querySelectorAll('.container');
-                containers.forEach(container => {
-                    container.classList.add('visible');
-                });
-                
-                // Update copyright year
-                const currentYear = new Date().getFullYear();
-                document.getElementById('copyrightText').innerHTML = `New website for andychan.xyz.wf &copy; 2022-${currentYear} Andy All Rights Reserved`;
-            };
-        </script>
 </body>
 </html>
