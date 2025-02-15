@@ -130,32 +130,6 @@
 
             changeColor();
 
-            // Magic Wand Cursor Functionality
-            const wand = document.getElementById('wand');
-            const colors = ['gold', 'green', 'red', 'blue', 'white'];
-
-            document.addEventListener('mousemove', (event) => {
-                wand.style.left = `${event.clientX}px`;
-                wand.style.top = `${event.clientY}px`;
-                if (Math.random() < 0.5) { // 50% chance
-                    createStar(event.clientX, event.clientY);
-                }
-            });
-
-            function createStar(x, y) {
-                const star = document.createElement('div');
-                star.className = 'star';
-                star.style.left = `${x}px`;
-                star.style.top = `${y}px`;
-                star.style.backgroundColor = colors[Math.floor(Math.random() * colors.length)];
-                star.style.animationDuration = `${Math.random() * 2 + 1}s`;
-                document.body.appendChild(star);
-                setTimeout(() => {
-                    star.remove();
-                }, 2000);
-            }
-        };
-
         // Title Change Functionality
         let originalTitle = "Andy's Website";
         let timeoutId;
@@ -171,6 +145,7 @@
                 document.title = originalTitle;
             }, 3000);
         });
+    }
     </script>
 </body>
 </html>
