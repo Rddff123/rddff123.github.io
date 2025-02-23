@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Welcome to my personal website. Learn more about me, my interests, and get in touch!">
+    <meta name="description" content="Welcome to my personal website. I am Andy. Learn more about me, my interests, and get in touch!">
     <title>Andy's Website</title>
     <style>
         html, body {
@@ -14,21 +14,25 @@
             display: flex;
             flex-direction: column;
         }
+
         nav {
             background-color: #5e25b9;
             color: white;
             padding: 15px;
             text-align: center;
         }
+
         nav a {
             color: white;
             margin: 0 15px;
             text-decoration: none;
             font-weight: bold;
         }
+
         nav a:hover {
             text-decoration: underline;
         }
+
         .container {
             flex: 1;
             display: flex;
@@ -40,10 +44,12 @@
             transition: opacity 1s ease, transform 1s ease;
             text-align: center;
         }
+
         .container.visible {
             opacity: 1;
             transform: translateY(0);
         }
+
         .copyright {
             background-color: #333;
             color: #93a023;
@@ -53,6 +59,7 @@
             display: flex;
             justify-content: center;
         }
+
         .star {
             position: absolute;
             border-radius: 50%;
@@ -61,15 +68,31 @@
             pointer-events: none;
             animation: fall linear forwards;
         }
+
         @keyframes fall {
-            0% {
-                transform: translateY(0);
-                opacity: 1;
-            }
-            100% {
-                transform: translateY(100vh);
-                opacity: 0;
-            }
+            0% { transform: translateY(0); opacity: 1; }
+            100% { transform: translateY(100vh); opacity: 0; }
+        }
+
+        .content {
+            text-align: center;
+            animation: colorChange 6s infinite linear;
+        }
+
+        h1 {
+            font-size: 3em;
+            margin-bottom: 20px;
+        }
+
+        p {
+            font-size: 1.5em;
+        }
+
+        @keyframes colorChange {
+            0% { color: rgb(255, 0, 0); }
+            33% { color: rgb(0, 255, 0); }
+            66% { color: rgb(0, 0, 255); }
+            100% { color: rgb(255, 0, 0); }
         }
     </style>
 </head>
@@ -83,16 +106,20 @@
         <a href="/others">Other games and projects</a>
         <a href="/update">Updates</a>
     </nav>
+
     <div class="container newlycolor" id="intro">
+        <div class="content">
         <h1>Hello, I'm Andy!</h1>
         <p>Welcome to my personal website.</p>
         <p>Here, you can find information about my projects and how to get in touch with me.</p>
         <p>Feel free to explore!</p>
+
+
+        </div>
     </div>
     <div class="copyright">
         <p id="copyrightText">New website for andychan.xyz.wf &copy; 2022-2024 Andy All Rights Reserved</p>
     </div>
-    <div class="magic-wand" id="wand"></div>
 
     <script>
         window.onload = function() {
@@ -130,23 +157,27 @@
             }
 
             changeColor();
+        };
 
-        // Title Change Functionality
-        let originalTitle = "Andy's Website";
-        let timeoutId;
+        function updateBackground() {
+            const content = document.querySelector('.content');
+            const color = window.getComputedStyle(content).color;
+            
+            // Extract RGB values and calculate inverse color
+            const rgb = color.match(/\d+/g).map(Number).slice(0, 3);
+            const inverseRGB = rgb.map(c => 255 - c);
+            
+            // Create gradient background (from dark to light)
+            const gradientStart = `rgb(${inverseRGB})`;
+            const gradientEnd = `rgba(${inverseRGB}, 0.3)`;
+            
+            document.body.style.background = 
+                `linear-gradient(to left bottom, ${gradientStart}, ${gradientEnd})`;
+            
+            requestAnimationFrame(updateBackground);
+        }
 
-        window.addEventListener('blur', function() {
-            document.title = "QAQ Please stay here!";
-            clearTimeout(timeoutId);
-        });
-
-        window.addEventListener('focus', function() {
-            document.title = "AwA Welcome!";
-            timeoutId = setTimeout(function() {
-                document.title = originalTitle;
-            }, 3000);
-        });
-    }
+        updateBackground();
     </script>
 </body>
 </html>
