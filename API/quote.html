@@ -1,0 +1,367 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>每日智慧箴言</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background: linear-gradient(135deg, #6a11cb 0%, #2575fc 100%);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+            color: #333;
+        }
+
+        .container {
+            max-width: 800px;
+            width: 100%;
+            margin: 0 auto;
+        }
+
+        header {
+            text-align: center;
+            margin-bottom: 40px;
+            color: white;
+        }
+
+        header h1 {
+            font-size: 2.8rem;
+            margin-bottom: 10px;
+            text-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+        }
+
+        header p {
+            font-size: 1.2rem;
+            opacity: 0.9;
+        }
+
+        .quote-card {
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 20px;
+            box-shadow: 0 15px 50px rgba(0, 0, 0, 0.2);
+            padding: 40px;
+            position: relative;
+            overflow: hidden;
+            transition: all 0.5s ease;
+        }
+
+        .quote-card::before {
+            content: """;
+            position: absolute;
+            top: -30px;
+            left: 20px;
+            font-size: 180px;
+            color: rgba(37, 117, 252, 0.1);
+            font-family: Georgia, serif;
+            line-height: 1;
+        }
+
+        .quote-content {
+            font-size: 1.8rem;
+            line-height: 1.6;
+            margin-bottom: 30px;
+            position: relative;
+            z-index: 2;
+            font-weight: 500;
+            color: #2c3e50;
+            transition: all 0.5s ease;
+        }
+
+        .quote-source {
+            font-size: 1.2rem;
+            text-align: right;
+            color: #7f8c8d;
+            font-style: italic;
+            margin-bottom: 30px;
+            padding-right: 20px;
+            position: relative;
+        }
+
+        .quote-source::before {
+            content: "— ";
+        }
+
+        .controls {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 15px;
+        }
+
+        .btn {
+            padding: 14px 30px;
+            border-radius: 50px;
+            border: none;
+            font-size: 1.1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15);
+        }
+
+        .btn:active {
+            transform: translateY(1px);
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, #6a11cb 0%, #2575fc 100%);
+            color: white;
+        }
+
+        .btn-secondary {
+            background: #f8f9fa;
+            color: #2575fc;
+            border: 2px solid #2575fc;
+        }
+
+        .btn i {
+            font-size: 1.2rem;
+        }
+
+        .loading {
+            text-align: center;
+            padding: 40px;
+            font-size: 1.3rem;
+            color: #7f8c8d;
+        }
+
+        .loading i {
+            display: block;
+            font-size: 3rem;
+            margin-bottom: 20px;
+            color: #2575fc;
+            animation: spin 1.5s linear infinite;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        .notification {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            background: white;
+            padding: 15px 25px;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+            transform: translateX(200%);
+            transition: transform 0.4s ease;
+            z-index: 1000;
+        }
+
+        .notification.show {
+            transform: translateX(0);
+        }
+
+        .quote-info {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 25px;
+            color: #7f8c8d;
+            font-size: 0.9rem;
+            padding-top: 15px;
+            border-top: 1px solid #eee;
+        }
+
+        .quote-id, .quote-length {
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+
+        footer {
+            text-align: center;
+            margin-top: 40px;
+            color: rgba(255, 255, 255, 0.8);
+            font-size: 0.9rem;
+        }
+
+        footer a {
+            color: white;
+            text-decoration: none;
+        }
+
+        @media (max-width: 768px) {
+            header h1 {
+                font-size: 2.2rem;
+            }
+            
+            .quote-content {
+                font-size: 1.5rem;
+            }
+            
+            .btn {
+                padding: 12px 20px;
+                font-size: 1rem;
+            }
+            
+            .controls {
+                flex-direction: column;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .quote-card {
+                padding: 30px 20px;
+            }
+            
+            .quote-content {
+                font-size: 1.3rem;
+            }
+            
+            header h1 {
+                font-size: 1.8rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>智慧箴言</h1>
+            <p>每日一句，启迪心灵</p>
+        </header>
+
+        <div class="quote-card">
+            <div id="quote-content" class="quote-content">
+                正在加载智慧箴言...
+            </div>
+            <div id="quote-source" class="quote-source"></div>
+            
+            <div class="quote-info">
+                <div id="quote-id" class="quote-id">
+                    <i class="fas fa-hashtag"></i> <span>ID: --</span>
+                </div>
+                <div id="quote-length" class="quote-length">
+                    <i class="fas fa-ruler"></i> <span>长度: --</span>
+                </div>
+            </div>
+            
+            <div class="controls">
+                <button id="new-quote" class="btn btn-primary">
+                    <i class="fas fa-sync-alt"></i> 新的名言
+                </button>
+                <button id="share-quote" class="btn btn-secondary">
+                    <i class="fas fa-share-alt"></i> 分享名言
+                </button>
+            </div>
+        </div>
+        
+        <footer>
+            <p>名言数据来自 <code>/API/quotes.json</code> | © 2023 智慧箴言</p>
+        </footer>
+    </div>
+    
+    <div id="notification" class="notification">
+        名言已复制到剪贴板！
+    </div>
+
+    <script>
+        // 获取DOM元素
+        const quoteContent = document.getElementById('quote-content');
+        const quoteSource = document.getElementById('quote-source');
+        const quoteId = document.getElementById('quote-id');
+        const quoteLength = document.getElementById('quote-length');
+        const newQuoteBtn = document.getElementById('new-quote');
+        const shareQuoteBtn = document.getElementById('share-quote');
+        const notification = document.getElementById('notification');
+        
+        // 从API获取名言数据
+        async function fetchQuotes() {
+            try {
+                // 显示加载状态
+                quoteContent.innerHTML = '<div class="loading"><i class="fas fa-spinner"></i>正在加载智慧箴言...</div>';
+                
+                // 从API获取数据（使用相对路径）
+                const response = await fetch('/API/quotes.json');
+                
+                if (!response.ok) {
+                    throw new Error('网络响应不正常');
+                }
+                
+                const quotes = await response.json();
+                return quotes;
+            } catch (error) {
+                console.error('获取名言时出错:', error);
+                quoteContent.innerHTML = `<p>无法加载名言数据，请稍后再试。<br><small>${error.message}</small></p>`;
+                return [];
+            }
+        }
+        
+        // 随机选择一条名言并显示
+        function displayRandomQuote(quotes) {
+            if (quotes.length === 0) return;
+            
+            // 随机选择一条名言
+            const randomIndex = Math.floor(Math.random() * quotes.length);
+            const quote = quotes[randomIndex];
+            
+            // 更新页面内容
+            quoteContent.textContent = `"${quote.hitokoto}"`;
+            quoteSource.textContent = `${quote.from}${quote.from_who ? ' · ' + quote.from_who : ''}`;
+            quoteId.querySelector('span').textContent = `ID: ${quote.id}`;
+            quoteLength.querySelector('span').textContent = `长度: ${quote.length}字`;
+        }
+        
+        // 初始化
+        async function init() {
+            const quotes = await fetchQuotes();
+            
+            // 如果成功获取到数据，显示第一条名言
+            if (quotes.length > 0) {
+                displayRandomQuote(quotes);
+                
+                // 为按钮添加事件监听
+                newQuoteBtn.addEventListener('click', () => {
+                    // 添加动画效果
+                    quoteContent.style.opacity = 0;
+                    quoteSource.style.opacity = 0;
+                    
+                    setTimeout(() => {
+                        displayRandomQuote(quotes);
+                        quoteContent.style.opacity = 1;
+                        quoteSource.style.opacity = 1;
+                    }, 300);
+                });
+                
+                shareQuoteBtn.addEventListener('click', () => {
+                    // 复制名言到剪贴板
+                    const textToCopy = `${quoteContent.textContent} —— ${quoteSource.textContent}`;
+                    navigator.clipboard.writeText(textToCopy);
+                    
+                    // 显示通知
+                    notification.classList.add('show');
+                    setTimeout(() => {
+                        notification.classList.remove('show');
+                    }, 2000);
+                });
+            }
+        }
+        
+        // 页面加载完成后初始化
+        document.addEventListener('DOMContentLoaded', init);
+    </script>
+</body>
+</html>
